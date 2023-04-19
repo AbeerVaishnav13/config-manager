@@ -50,8 +50,13 @@ function fish_prompt
     printf "ψ"
     set_color red --bold
     printf "⟩ "
-    set_color green --bold
-    printf (fish_git_prompt)
+
+    set GIT_STRING (fish_git_prompt)
+    if [ "$GIT_STRING" != "" ]
+        set_color green --bold
+        printf (fish_git_prompt)
+        printf " "
+    end
 
     if [ "$CONDA_DEFAULT_ENV" != "" ]
         set_color blue --bold
