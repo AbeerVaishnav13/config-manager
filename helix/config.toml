@@ -1,0 +1,59 @@
+theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"
+mouse = true
+scrolloff = 2
+bufferline = "multiple"
+auto-save = true
+shell = ["/opt/homebrew/bin/fish", "-c"]
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.file-picker]
+hidden = false
+
+[editor.statusline]
+left = ["spacer", "mode", "spacer", "separator", "spinner", "file-name", "file-type"]
+right = ["diagnostics", "selections", "position", "file-encoding", "separator", "spacer", "position-percentage", "spacer"]
+
+[editor.indent-guides]
+render = true
+character = "▏" # Some characters that work well: "▏", "┆", "┊", "⸽"
+
+[keys.normal]
+W = ":write"
+Q = {Q = ":buffer-close", A = ":quit"}
+q = {m = "record_macro", q = "replay_macro"}
+C-c = ["normal_mode", "collapse_selection"]
+space = {"/" = "toggle_comments"}
+k = "move_char_right"
+l = "no_op"
+u = "move_line_up"
+U = "undo"
+C-r = "redo"
+g = {k = "goto_line_end", l = "no_op", "/" = "global_search", n = "no_op", p = "no_op"}
+X = "extend_line_above"
+"'" = "repeat_last_motion"
+";" = "command_mode"
+C-w = {k = "jump_view_right", u = "jump_view_up", l = "no_op", C-k = "jump_view_right", C-u = "jump_view_up", C-l = "no_op"}
+H = "goto_previous_buffer"
+K = "goto_next_buffer"
+C-f = [":new", ":insert-output lf_pick", ":theme default", "select_all", "split_selection_on_newline", "goto_file", "goto_last_modified_file", ":buffer-close!", ":theme catppuccin_mocha"]
+
+[keys.insert]
+C-c = "normal_mode"
+
+[keys.select]
+W = ":write"
+Q = {Q = ":buffer-close", A = ":quit"}
+C-c = ["normal_mode", "collapse_selection"]
+space = {"/" = "toggle_comments"}
+k = "move_char_right"
+u = "move_line_up"
+U = "undo"
+g = {k = "goto_line_end", l = "no_op", "/" = "global_search"}
+C-r = "redo"
+"'" = "repeat_last_motion"
+";" = "command_mode"

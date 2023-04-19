@@ -1,0 +1,9 @@
+---
+"pane_group:navigate_right": shift-cmd-K
+"pane_group:navigate_up": shift-cmd-U
+"pane_group:resize_down": ctrl-cmd-j
+"pane_group:navigate_down": shift-cmd-J
+"pane_group:resize_right": ctrl-cmd-k
+"pane_group:resize_up": ctrl-cmd-u
+"pane_group:resize_left": ctrl-cmd-h
+"pane_group:navigate_left": shift-cmd-H
