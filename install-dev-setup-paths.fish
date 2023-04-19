@@ -2,7 +2,7 @@
 
 ####### Install packages #######
 # Install necessary packages 
-/opt/homebrew/bin/brew install neovim python@3.10 gcc bat exa zellij cmake git lazygit make pandoc stylua bpytop latexindent marksman par ripgrep yaml-language-server
+/opt/homebrew/bin/brew install neovim python@3.10 node gcc bat exa zellij cmake git lazygit make pandoc stylua bpytop latexindent marksman par ripgrep yaml-language-server
 
 # Install optional packages
 # /opt/homebrew/bin/brew install rust rust-analyzer helix marp-cli
