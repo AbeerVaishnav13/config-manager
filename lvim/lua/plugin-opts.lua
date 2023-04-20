@@ -41,6 +41,7 @@ lvim.plugins = {
 	},
 	{
 		"dag/vim-fish",
+		event = "BufEnter *.fish",
 	},
 	{
 		"ziontee113/icon-picker.nvim",
