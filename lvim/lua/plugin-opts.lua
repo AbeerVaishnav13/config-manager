@@ -3,7 +3,7 @@
 lvim.plugins = {
 	{
 		"kylechui/nvim-surround",
-		tag = "*",
+		version = "*",
 		config = function()
 			-- nvim-surround setup
 			require("nvim-surround").setup({})
@@ -11,8 +11,8 @@ lvim.plugins = {
 	},
 	{
 		"danymat/neogen",
-		tag = "*",
-		requires = "nvim-treesitter/nvim-treesitter",
+		version = "*",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			-- Neogen setup
 			local neogen_opts = {
@@ -37,7 +37,7 @@ lvim.plugins = {
 	},
 	{
 		"catppuccin/nvim",
-		as = "catppuccin",
+		name = "catppuccin",
 	},
 	{
 		"dag/vim-fish",
@@ -71,7 +71,7 @@ lvim.plugins = {
 	-- },
 	{
 		"ziontee113/icon-picker.nvim",
-		requires = "stevearc/dressing.nvim",
+		dependencies = "stevearc/dressing.nvim",
 		config = function()
 			require("icon-picker").setup({
 				disable_legacy_commands = true,
@@ -80,8 +80,7 @@ lvim.plugins = {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		after = "nvim-treesitter",
-		requires = "nvim-treesitter/nvim-treesitter",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				textobjects = {

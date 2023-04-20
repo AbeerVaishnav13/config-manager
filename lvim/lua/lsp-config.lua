@@ -5,7 +5,7 @@ lvim.lsp.installer.setup.ensure_installed = {
 	"cssls",
 	"html",
 	"jsonls",
-	"sumneko_lua",
+	"lua_ls",
 	"marksman",
 	"pyright",
 	"rust_analyzer",
