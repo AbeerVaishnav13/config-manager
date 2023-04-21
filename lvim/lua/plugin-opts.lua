@@ -29,7 +29,7 @@ lvim.plugins = {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		config = { enable = true, max_lines = -1, trim_scope = "inner", separator = "-", mode = "cursor" },
+		config = { enable = true, max_lines = -1, trim_scope = "inner", separator = "⟺", mode = "cursor" },
 	},
 	{
 		"catppuccin/nvim",
