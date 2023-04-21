@@ -100,17 +100,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 	group = vim.api.nvim_create_augroup("RenameWithQflist", { clear = true }),
 })
-
--- Plugin keymaps
--- Neogen keymaps
-lvim.keys.normal_mode["<leader>nds"] = "<cmd>Neogen<cr>"
-lvim.keys.insert_mode["'''<cr>"] = "<esc><cmd>norm dd<cr>k <cmd>Neogen<cr>"
-lvim.keys.insert_mode['"""<cr>'] = "<esc><cmd>norm dd<cr>k <cmd>Neogen<cr>"
-
--- LazyGit keymaps
-lvim.keys.normal_mode["<leader>lg"] = "<cmd>LazyGit<cr>"
-
--- Icon picker keymaps
-lvim.keys.normal_mode["<Leader><Leader>i"] = "<cmd>IconPickerNormal<cr>"
-lvim.keys.normal_mode["<Leader><Leader>y"] = "<cmd>IconPickerYank<cr>"
-lvim.keys.insert_mode["<C-p>"] = "<cmd>IconPickerInsert<cr>"

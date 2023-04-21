@@ -4,36 +4,32 @@ lvim.plugins = {
 	{
 		"kylechui/nvim-surround",
 		version = "*",
-		config = function()
-			-- nvim-surround setup
-			require("nvim-surround").setup({})
-		end,
+		config = {},
 	},
 	{
 		"danymat/neogen",
 		version = "*",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = function()
-			-- Neogen setup
-			local neogen_opts = {
-				enabled = true,
-				languages = { python = { template = { annotation_convention = "google_docstrings" } } },
-				snippet_engine = "luasnip",
-			}
-			require("neogen").setup(neogen_opts)
-		end,
+		config = {
+			enabled = true,
+			languages = { python = { template = { annotation_convention = "google_docstrings" } } },
+			snippet_engine = "luasnip",
+		},
+		cmd = "Neogen",
+		keys = {
+			{ "<leader>nds", "<cmd>Neogen<cr>", desc = "Neogen gen-docs (Normal)" },
+		},
 	},
 	{
 		"kdheepak/lazygit.nvim",
+		cmd = "LazyGit",
+		keys = {
+			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "Open LazyGit" },
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		config = function()
-			-- Treesitter-context setup
-			local ts_ctx_opts =
-				{ enable = true, max_lines = -1, trim_scope = "inner", separator = "-", mode = "cursor" }
-			require("treesitter-context").setup(ts_ctx_opts)
-		end,
+		config = { enable = true, max_lines = -1, trim_scope = "inner", separator = "-", mode = "cursor" },
 	},
 	{
 		"catppuccin/nvim",
@@ -46,11 +42,19 @@ lvim.plugins = {
 	{
 		"ziontee113/icon-picker.nvim",
 		dependencies = "stevearc/dressing.nvim",
-		config = function()
-			require("icon-picker").setup({
-				disable_legacy_commands = true,
-			})
-		end,
+		config = {
+			disable_legacy_commands = true,
+		},
+		cmd = {
+			"IconPickerNormal",
+			"IconPickerYank",
+			"IconPickerInsert",
+		},
+		keys = {
+			{ "<C-i><C-n>", "<cmd>IconPickerNormal<cr>", desc = "Icon Picker (Normal)" },
+			{ "<C-i><C-y>", "<cmd>IconPickerYank<cr>", desc = "Icon Picker (Normal,Yank)" },
+			{ "<C-i><C-i>", "<cmd>IconPickerInsert<cr>", desc = "Icon Picker (Insert)" },
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -73,12 +77,6 @@ lvim.plugins = {
 							["ab"] = { query = "@block.outer", desc = "Select outer part of a block region" },
 							["ib"] = { query = "@block.inner", desc = "Select inner part of a block region" },
 						},
-						selection_modes = {
-							["@parameter.outer"] = "v", -- charwise
-							["@function.outer"] = "V", -- linewise
-							["@class.outer"] = "<c-v>", -- blockwise
-						},
-						-- include_surrounding_whitespace = true,
 					},
 					swap = {
 						enable = true,
