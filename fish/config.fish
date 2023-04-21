@@ -6,7 +6,7 @@ set __fish_git_prompt_showdirtystate true
 set __fish_git_prompt_showupstream auto
 set __fish_git_prompt_showstashstate true
 set __fish_git_prompt_describe_style describe
-set __fish_git_prompt_char_dirtystate +
+set __fish_git_prompt_char_dirtystate 
 set __fish_git_prompt_char_invalidstate ×
 set __fish_git_prompt_char_stashstate  
 
