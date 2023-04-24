@@ -21,13 +21,6 @@ lvim.plugins = {
 		},
 	},
 	{
-		"kdheepak/lazygit.nvim",
-		cmd = "LazyGit",
-		keys = {
-			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "Open LazyGit" },
-		},
-	},
-	{
 		"nvim-treesitter/nvim-treesitter-context",
 		config = { enable = true, max_lines = -1, trim_scope = "inner", separator = "⟺", mode = "cursor" },
 	},
