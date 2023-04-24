@@ -57,7 +57,7 @@ function fish_prompt
     if [ "$GIT_STRING" != "" ]
         set_color normal
         set_color yellow
-        printf " [git ::$(fish_git_prompt)]"
+        printf " [שׂ ::$(fish_git_prompt)]"
     end
 
     if [ "$CONDA_DEFAULT_ENV" != "" ]
@@ -65,7 +65,7 @@ function fish_prompt
         printf " [conda :: $CONDA_DEFAULT_ENV]"
     else if [ "$VIRTUAL_ENV" != "" ]
         set_color blue
-        printf " [venv :: $CONDA_DEFAULT_ENV]"
+        printf " [venv :: $VIRTUAL_ENV]"
     end
     set_color green --bold
     printf "\n "
