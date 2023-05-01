@@ -16,6 +16,8 @@ lvim.keys.normal_mode["U"] = "u"
 lvim.keys.normal_mode["k"] = "l"
 lvim.keys.normal_mode["<c-w>k"] = "<c-w>l"
 lvim.keys.normal_mode["<c-w>u"] = "<c-w>k"
+lvim.keys.normal_mode["<c-k>"] = "<c-l>"
+lvim.keys.normal_mode["<c-u>"] = "<c-k>"
 lvim.keys.normal_mode["<c-w>."] = "<c-w>>"
 lvim.keys.normal_mode["<c-w>,"] = "<c-w><"
 lvim.keys.normal_mode["<c-w>="] = "<c-w>+"
@@ -25,6 +27,7 @@ lvim.keys.normal_mode["<c-w><c-h>"] = "<c-w>t<c-w>K"
 lvim.keys.normal_mode["K"] = "<cmd>BufferLineCycleNext<cr>"
 lvim.keys.normal_mode["H"] = "<cmd>BufferLineCyclePrev<cr>"
 lvim.keys.normal_mode["T"] = "<cmd>vsplit<cr><cmd>term fish<cr>A"
+lvim.keys.normal_mode["<leader>lg"] = "<cmd>lua require('lvim.core.terminal').lazygit_toggle()<cr>"
 vim.keymap.set("n", "S", ":%s/\\<<c-r><c-w>\\>/<c-r><c-w>/gI<left><left><left>", { desc = "Search & Replace" })
 
 ---- LSP keymaps
@@ -41,6 +44,7 @@ lvim.lsp.buffer_mappings.normal_mode["<leader>lk"] = nil
 ---- Disable the annoying mappings
 lvim.builtin.which_key.mappings["c"] = nil
 lvim.builtin.which_key.mappings["q"] = nil
+lvim.builtin.which_key.mappings["g"]["g"] = nil
 
 -- Visual mode
 ---- global keymaps
