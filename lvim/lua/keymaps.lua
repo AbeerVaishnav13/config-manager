@@ -31,7 +31,7 @@ lvim.keys.normal_mode["<leader>lg"] = "<cmd>lua require('lvim.core.terminal').la
 vim.keymap.set("n", "S", ":%s/\\<<c-r><c-w>\\>/<c-r><c-w>/gI<left><left><left>", { desc = "Search & Replace" })
 
 ---- LSP keymaps
-lvim.lsp.buffer_mappings.normal_mode["<leader>k"] = { vim.lsp.buf.hover, "Show Documentation" }
+lvim.lsp.buffer_mappings.normal_mode["<leader>kk"] = { vim.lsp.buf.hover, "Show Documentation" }
 lvim.lsp.buffer_mappings.normal_mode["gt"] = { vim.lsp.buf.type_definition, "Goto type definition" }
 lvim.lsp.buffer_mappings.normal_mode["]d"] = { vim.diagnostic.goto_next, "Next Diagnostic" }
 lvim.lsp.buffer_mappings.normal_mode["[d"] = { vim.diagnostic.goto_prev, "Prev Diagnostic" }

@@ -16,19 +16,24 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 local markdown_open = function()
 	local filename = utils.get_curr_filename()
-	vim.api.nvim_exec("!open " .. filename .. ".pdf", true)
-	vim.api.nvim_exec("!open -a Warp", true)
+	vim.api.nvim_exec2("!open " .. filename .. ".pdf", { output = true })
+	vim.api.nvim_exec2("!open -a Alacritty", { output = true })
 end
 
 local run_pandoc = function()
 	local filename = utils.get_curr_filename()
 	local cmd = "!pandoc -o " .. filename .. ".pdf " .. filename .. ".md"
-	local stdout = vim.api.nvim_exec(cmd, true)
-	local has_error = #vim.split(stdout, "Error", { plain = true })
+	local stdout = vim.api.nvim_exec2(cmd, { output = true })
 
-	if has_error > 1 then
+	local has_pdflatex = #vim.split(stdout.output, "pdflatex", { plain = true }) == 1
+	if not has_pdflatex then
+		error("Install 'mactex' or any other distribution of pdflatex")
+	end
+
+	local has_error = #vim.split(stdout.output, "Error", { plain = true }) > 1
+	if has_error then
 		local bufnr = vim.api.nvim_create_buf(true, true)
-		vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, vim.split(stdout, "\n", { plain = true }))
+		vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, vim.split(stdout.output, "\n", { plain = true }))
 
 		if Md_error_win and vim.api.nvim_win_is_valid(Md_error_win) then
 			local err_buf = vim.api.nvim_win_get_buf(Md_error_win)
@@ -56,7 +61,10 @@ local markdown_autoreload = function(state)
 			group = md_autoreload_group,
 		})
 	else
-		vim.api.nvim_del_augroup_by_name("MarkdownAutoreloadGroup")
+		local _, err = pcall(vim.api.nvim_del_augroup_by_name, "MarkdownAutoreloadGroup")
+		if err then
+			error("First run 'MdAutoReload' command to generate the autocmd.")
+		end
 	end
 end
 
