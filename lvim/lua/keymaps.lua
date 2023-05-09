@@ -28,6 +28,7 @@ lvim.keys.normal_mode["K"] = "<cmd>BufferLineCycleNext<cr>"
 lvim.keys.normal_mode["H"] = "<cmd>BufferLineCyclePrev<cr>"
 lvim.keys.normal_mode["T"] = "<cmd>vsplit<cr><cmd>term fish<cr>A"
 lvim.keys.normal_mode["<leader>lg"] = "<cmd>lua require('lvim.core.terminal').lazygit_toggle()<cr>"
+lvim.keys.normal_mode["<leader>lb"] = "<cmd>Telescope buffers<cr>"
 vim.keymap.set("n", "S", ":%s///gI<left><left><left><left>", { desc = "Search & Replace" })
 -- stylua: ignore
 vim.keymap.set("n", "R", ":%s/\\<<c-r><c-w>\\>/<c-r><c-w>/gI<left><left><left>", { desc = "Search & Replace (cursor word)" })
@@ -47,6 +48,8 @@ lvim.lsp.buffer_mappings.normal_mode["<leader>lk"] = nil
 lvim.builtin.which_key.mappings["c"] = nil
 lvim.builtin.which_key.mappings["q"] = nil
 lvim.builtin.which_key.mappings["g"]["g"] = nil
+lvim.builtin.which_key.mappings["b"]["b"] = nil
+lvim.builtin.which_key.mappings["b"]["n"] = nil
 
 -- Visual mode
 ---- global keymaps
