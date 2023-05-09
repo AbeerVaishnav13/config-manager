@@ -28,7 +28,9 @@ lvim.keys.normal_mode["K"] = "<cmd>BufferLineCycleNext<cr>"
 lvim.keys.normal_mode["H"] = "<cmd>BufferLineCyclePrev<cr>"
 lvim.keys.normal_mode["T"] = "<cmd>vsplit<cr><cmd>term fish<cr>A"
 lvim.keys.normal_mode["<leader>lg"] = "<cmd>lua require('lvim.core.terminal').lazygit_toggle()<cr>"
-vim.keymap.set("n", "S", ":%s/\\<<c-r><c-w>\\>/<c-r><c-w>/gI<left><left><left>", { desc = "Search & Replace" })
+vim.keymap.set("n", "S", ":%s///gI<left><left><left><left>", { desc = "Search & Replace" })
+-- stylua: ignore
+vim.keymap.set("n", "R", ":%s/\\<<c-r><c-w>\\>/<c-r><c-w>/gI<left><left><left>", { desc = "Search & Replace (cursor word)" })
 
 ---- LSP keymaps
 lvim.lsp.buffer_mappings.normal_mode["<leader>kk"] = { vim.lsp.buf.hover, "Show Documentation" }
