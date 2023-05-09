@@ -99,8 +99,8 @@ M.set_transparency = function()
 end
 
 M.show_messages = function()
-	local msgs = vim.api.nvim_exec("messages", true)
-	local lines = vim.split(msgs, "\n", { plain = true })
+	local msgs = vim.api.nvim_exec2("messages", { output = true })
+	local lines = vim.split(msgs.output, "\n", { plain = true })
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, lines)
 
