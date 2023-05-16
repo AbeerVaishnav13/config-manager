@@ -8,7 +8,7 @@
 # /opt/homebrew/bin/brew install rust rust-analyzer helix marp-cli
 
 ####### Install casks #######
-# /opt/homebrew/bin/brew --cask install alacritty mactex klayout parraview zoom discord anaconda brave-browser xquartz slack amethyst keka elmedia-player git-delta
+# /opt/homebrew/bin/brew --cask install alacritty basictex klayout parraview zoom discord anaconda brave-browser xquartz slack amethyst keka elmedia-player git-delta
 
 ####### Setup Config files #######
 # mkdir -p ~/.config

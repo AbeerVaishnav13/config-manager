@@ -27,7 +27,7 @@ local run_pandoc = function()
 
 	local has_pdflatex = #vim.split(stdout.output, "pdflatex", { plain = true }) == 1
 	if not has_pdflatex then
-		error("Install 'mactex' or any other distribution of pdflatex")
+		error("Install 'basictex' or any other distribution of pdflatex for Mac.")
 	end
 
 	local has_error = #vim.split(stdout.output, "Error", { plain = true }) > 1
