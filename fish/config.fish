@@ -83,6 +83,7 @@ set PATH $HOME/.local/share/nvim/mason/bin/ $PATH
 set PATH $HOME/.local/bin/ $PATH
 set PATH $HOME/Documents/Coding/palace/build/bin/ $PATH
 set PATH $HOME/Documents/Coding/ziglang/ $PATH
+set PATH /Library/TeX/texbin/ $PATH
 
 # Set man pager
 # set -x MANPAGER "bat --theme catppuccin-mocha"
