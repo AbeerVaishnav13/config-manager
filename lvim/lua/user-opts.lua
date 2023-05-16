@@ -1,6 +1,7 @@
 -- General options
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
+lvim.reload_config_on_save = true
 lvim.colorscheme = "catppuccin-mocha"
 lvim.transparent_window = true
 vim.opt.relativenumber = true
