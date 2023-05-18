@@ -112,6 +112,37 @@ M.get_curr_filename = function()
 	return vim.split(vim.fn.expand("%:p", true), ".", { plain = true })[1]
 end
 
+M.markdown_notes_template = function()
+	local margin = vim.fn.input({ prompt = "Margin (1in): " })
+	local fontsize = vim.fn.input({ prompt = "Font-size (12pt): " })
+	local bgcolor = vim.fn.input({ prompt = "BgColor (#202020): " })
+	local fgcolor = vim.fn.input({ prompt = "FgColor (#ffffff): " })
+
+    -- stylua: ignore
+	if margin == "" then margin = "1in" end
+    -- stylua: ignore
+	if fontsize == "" then fontsize = "12pt" end
+    -- stylua: ignore
+	if bgcolor == "" then bgcolor = "202020" end
+    -- stylua: ignore
+	if fgcolor == "" then fgcolor = "ffffff" end
+
+	local header_info = {
+		"---",
+		"geometry: margin=" .. margin,
+		"fontsize: " .. fontsize,
+		"header-includes: |",
+		"    \\definecolor{bg}{HTML}{" .. bgcolor .. "}",
+		"    \\definecolor{txt}{HTML}{" .. fgcolor .. "}",
+		"    \\pagecolor{bg}",
+		"    \\color{txt}",
+		"---",
+		"",
+	}
+	vim.api.nvim_buf_set_lines(0, 0, 0, true, header_info)
+end
+
+vim.api.nvim_create_user_command("MdNotesTemplate", "lua require('utils').markdown_notes_template()", {})
 vim.api.nvim_create_user_command("Messages", "lua require('utils').show_messages()", {})
 
 return M
