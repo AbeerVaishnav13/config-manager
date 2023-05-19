@@ -15,6 +15,24 @@ fi
 # /opt/homebrew/bin/brew install zellij warp alacritty helix
 
 
+####### Install LunarVim & Config #######
+if [ ! -f "$HOME/.local/bin/lvim" ]
+then
+    LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+fi
+
+if [ -L "$HOME/.config/lvim" ]
+then
+    echo "The symlink $HOME/.config/lvim already exists."
+elif [ -d "$HOME/.config/lvim" ]
+then
+    echo "The directory $HOME/.config/lvim already exists. Removing dir..."
+    rm -r $HOME/.config/lvim
+    echo "Linking $HOME/.config/lvim..."
+    ln -Fs $PWD/lvim ~/.config
+fi
+
+
 ####### Setup Config files #######
 # mkdir -p ~/.config
 
@@ -39,23 +57,3 @@ checkAndLink "wezterm" "$HOME/.config"
 # checkAndLink "alacritty" "$HOME/.config"
 # checkAndLink "zellij" "$HOME/.config"
 # checkAndLink "helix" "$HOME/.config"
-
-
-####### Install LunarVim #######
-
-if [ ! -f "$HOME/.local/bin/lvim" ]
-then
-    LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
-fi
-
-if [ -L "$HOME/.config/lvim" ]
-then
-    echo "The symlink $HOME/.config/lvim already exists."
-elif [ -d "$HOME/.config/lvim" ]
-then
-    echo "The directory $HOME/.config/lvim already exists. Removing dir..."
-    rm -r $HOME/.config/lvim
-    echo "Linking $HOME/.config/lvim..."
-    ln -Fs $PWD/lvim ~/.config
-fi
-
