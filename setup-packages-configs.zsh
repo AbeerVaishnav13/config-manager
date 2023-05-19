@@ -9,7 +9,7 @@ fi
 
 ####### Install packages #######
 # Install using WezTerm
-/opt/homebrew/bin/brew install fish wezterm neovim node gcc bat exa cmake git lazygit make pandoc stylua bpytop latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz slack amethyst keka git-delta
+/opt/homebrew/bin/brew install fish wezterm neovim node gcc bat exa cmake git lazygit make pandoc stylua bpytop latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz slack amethyst keka git-delta font-caskaydia-cove-nerd-font
 
 # Some optional packages
 # /opt/homebrew/bin/brew install zellij warp alacritty helix
