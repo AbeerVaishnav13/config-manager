@@ -6,7 +6,7 @@ set __fish_git_prompt_showdirtystate true
 set __fish_git_prompt_showupstream auto
 set __fish_git_prompt_showstashstate true
 set __fish_git_prompt_describe_style describe
-set __fish_git_prompt_char_dirtystate 
+set __fish_git_prompt_char_dirtystate +
 set __fish_git_prompt_char_invalidstate ×
 set __fish_git_prompt_char_stashstate  
 
@@ -36,7 +36,7 @@ function fish_mode_prompt
     # set_color normal
 end
 
-function fish_prompt
+function prompt_basic
     set_color magenta --bold
     printf "\n[] "
     set_color red --bold
@@ -53,24 +53,34 @@ function fish_prompt
     printf "ψ"
     set_color red --bold
     printf "⟩"
+end
 
+function prompt_git
     set GIT_STRING (fish_git_prompt)
     if [ "$GIT_STRING" != "" ]
         set_color normal
         set_color yellow
         printf " [שׂ ::$(fish_git_prompt)]"
     end
+end
 
+function prompt_python
+    set py_ver $(python3 --version | awk {'print $2'})
     if [ "$CONDA_DEFAULT_ENV" != "" ]
         set_color blue
-        printf " [conda :: $CONDA_DEFAULT_ENV]"
+        printf " [conda( $py_ver) :: $CONDA_DEFAULT_ENV]"
     else if [ "$VIRTUAL_ENV" != "" ]
         set_color blue
-        printf " [venv :: $VIRTUAL_ENV]"
+        printf " [venv( $py_ver) :: $VIRTUAL_ENV]"
     end
     set_color green --bold
     printf "\n "
+end
 
+function fish_prompt
+    prompt_basic
+    prompt_git
+    prompt_python
     set_color normal
 end
 
