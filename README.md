@@ -6,5 +6,5 @@ These are my different configs for dev setup
 - Run in native (MacOS) `zsh` shell:
 
 ```bash
-$ zsh -c "$(curl -s https://github.com/AbeerVaishnav13/config-manager/blob/main/setup-packages-configs.zsh)"
+$ zsh -c "$(curl -s https://raw.githubusercontent.com/AbeerVaishnav13/config-manager/main/setup-packages-configs.zsh)"
 ```
