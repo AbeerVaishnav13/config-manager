@@ -19,7 +19,7 @@ end
 
 function prompt_basic
     set_color magenta --bold
-    printf "\n[] "
+    printf "[] "
 
     set_color red --bold
     printf "⟨"
@@ -66,7 +66,10 @@ function prompt_vim_mode
             set_color --bold green
             printf " <|INS|>"
         case replace_one
-            set_color --bold blue
+            set_color --bold cyan
+            printf " <|REP1|>"
+        case replace
+            set_color --bold cyan
             printf " <|REP|>"
         case visual
             set_color --bold magenta
@@ -78,6 +81,8 @@ function prompt_vim_mode
 end
 
 function fish_prompt
+    printf "\n"
+
     prompt_basic
     prompt_git
     prompt_python
