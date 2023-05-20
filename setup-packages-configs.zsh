@@ -49,12 +49,12 @@ then
     echo "\nThe directory $HOME/.config/lvim already exists. Removing dir..."
     rm -r $HOME/.config/lvim
     echo "Linking $HOME/.config/lvim..."
-    ln -Fs $PWD/lvim ~/.config
+    ln -Fs $PWD/lvim $HOME/config
 fi
 
 
 ####### Setup Config files #######
-# mkdir -p ~/.config
+# mkdir -p $HOME/.config
 
 checkAndLink() {
     if [ -L "$2/$1" ]
