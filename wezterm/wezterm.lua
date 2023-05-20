@@ -24,6 +24,7 @@ config.window_decorations = "RESIZE"
 config.line_height = 1.2
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.quit_when_all_windows_are_closed = true
+config.scrollback_lines = 100000
 
 -- Keymaps
 config.keys = {
