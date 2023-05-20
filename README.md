@@ -2,5 +2,9 @@
 These are my different configs for dev setup
 
 ## Installation
-- Run the `install-brew.sh` file in native (MacOS) `zsh` shell.
-- Run `install-dev-setup-paths.fish` in `fish` shell to install rest of the packages and setup config files for each.
+### Option-1 (Preferred)
+- Run in native (MacOS) `zsh` shell:
+
+```bash
+$ zsh -c "$(curl -s https://github.com/AbeerVaishnav13/config-manager/blob/main/setup-packages-configs.zsh)"
+```
