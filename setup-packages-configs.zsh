@@ -12,20 +12,20 @@ fi
 
 ####### Install packages #######
 # Install Packages
-echo "Adding Homebrew tap for Nerd-Fonts..."
+echo "\nAdding Homebrew tap for Nerd-Fonts..."
 /opt/homebrew/bin/brew tap homebrew/cask-fonts
 
-echo "Installing Git..."
+echo "\nInstalling Git..."
 /opt/homebrew/bin/brew install git
 
-echo "Making $HOME/Dev..."
+echo "\nMaking $HOME/Dev..."
 mkdir -p "$HOME/Dev" && cd "$HOME/Dev"
 
-echo "Cloning https://github.com/AbeerVaishnav13/config-manager.git..."
+echo "\nCloning https://github.com/AbeerVaishnav13/config-manager.git..."
 git clone https://github.com/AbeerVaishnav13/config-manager.git
 cd "config-manager"
 
-echo "Installing all packages..."
+echo "\nInstalling all packages..."
 /opt/homebrew/bin/brew install fish wezterm neovim node gcc bat exa cmake lazygit make pandoc stylua bpytop latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz slack amethyst keka git-delta font-caskaydia-cove-nerd-font
 
 # Some optional packages
@@ -35,18 +35,18 @@ echo "Installing all packages..."
 ####### Install LunarVim & Config #######
 if [ -f "$HOME/.local/bin/lvim" ]
 then
-    echo "LunarVim already installed."
+    echo "\nLunarVim already installed."
 else
-    echo "Installing LunarVim..."
+    echo "\nInstalling LunarVim..."
     LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 fi
 
 if [ -L "$HOME/.config/lvim" ]
 then
-    echo "The symlink $HOME/.config/lvim already exists."
+    echo "\nThe symlink $HOME/.config/lvim already exists."
 elif [ -d "$HOME/.config/lvim" ]
 then
-    echo "The directory $HOME/.config/lvim already exists. Removing dir..."
+    echo "\nThe directory $HOME/.config/lvim already exists. Removing dir..."
     rm -r $HOME/.config/lvim
     echo "Linking $HOME/.config/lvim..."
     ln -Fs $PWD/lvim ~/.config
@@ -59,9 +59,9 @@ fi
 checkAndLink() {
     if [ -L "$2/$1" ]
     then
-        echo "The symlink $2/$1 already exists."
+        echo "\nThe symlink $2/$1 already exists."
     else
-        echo "Linking $1 to $2/$1..."
+        echo "\nLinking $1 to $2/$1..."
         ln -Fs $PWD/$1 $2
     fi
 }
