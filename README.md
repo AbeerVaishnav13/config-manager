@@ -2,7 +2,6 @@
 These are my different configs for dev setup
 
 ## Installation
-### Option-1 (Preferred)
 - Run in native (MacOS) `zsh` shell:
 
 ```bash
