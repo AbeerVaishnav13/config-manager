@@ -1,23 +1,43 @@
 #!/bin/zsh
 
 ####### Install homebrew #######
-if [ ! -d "/opt/homebrew/" ]
+if [ -d "/opt/homebrew/" ]
 then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "Homebrew already exists."
+else
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
 fi
 
 
 ####### Install packages #######
-# Install using WezTerm
-/opt/homebrew/bin/brew install fish wezterm neovim node gcc bat exa cmake git lazygit make pandoc stylua bpytop latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz slack amethyst keka git-delta font-caskaydia-cove-nerd-font
+# Install Packages
+echo "Adding Homebrew tap for Nerd-Fonts..."
+/opt/homebrew/bin/brew tap homebrew/cask-fonts
+
+echo "Installing Git..."
+/opt/homebrew/bin/brew install git
+
+echo "Making $HOME/Dev..."
+mkdir -p "$HOME/Dev" && cd "$HOME/Dev"
+
+echo "Cloning https://github.com/AbeerVaishnav13/config-manager.git..."
+git clone https://github.com/AbeerVaishnav13/config-manager.git
+cd "config-manager"
+
+echo "Installing all packages..."
+/opt/homebrew/bin/brew install fish wezterm neovim node gcc bat exa cmake lazygit make pandoc stylua bpytop latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz slack amethyst keka git-delta font-caskaydia-cove-nerd-font
 
 # Some optional packages
 # /opt/homebrew/bin/brew install zellij warp alacritty helix
 
 
 ####### Install LunarVim & Config #######
-if [ ! -f "$HOME/.local/bin/lvim" ]
+if [ -f "$HOME/.local/bin/lvim" ]
 then
+    echo "LunarVim already installed."
+else
+    echo "Installing LunarVim..."
     LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 fi
 
