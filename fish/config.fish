@@ -15,30 +15,12 @@ function fish_greeting
 end
 
 function fish_mode_prompt
-    # printf "\n"
-    # switch $fish_bind_mode
-    #     case default
-    #         set_color --bold red
-    #         printf "[N] "
-    #     case insert
-    #         set_color --bold green
-    #         printf "[I] "
-    #     case replace_one
-    #         set_color --bold blue
-    #         printf "[R] "
-    #     case visual
-    #         set_color --bold magenta
-    #         printf "[V] "
-    #     case '*'
-    #         set_color --bold red
-    #         printf "[?] "
-    # end
-    # set_color normal
 end
 
 function prompt_basic
     set_color magenta --bold
     printf "\n[] "
+
     set_color red --bold
     printf "⟨"
     set_color yellow
@@ -60,12 +42,12 @@ function prompt_git
     if [ "$GIT_STRING" != "" ]
         set_color normal
         set_color yellow
-        printf " [שׂ ::$(fish_git_prompt)]"
+        printf " [ ::$(fish_git_prompt)]"
     end
 end
 
 function prompt_python
-    set py_ver $(python3 --version | awk {'print $2'})
+    set py_ver $(python3 --version | awk '{print $2}')
     if [ "$CONDA_DEFAULT_ENV" != "" ]
         set_color blue
         printf " [conda( $py_ver) :: $CONDA_DEFAULT_ENV]"
@@ -73,14 +55,36 @@ function prompt_python
         set_color blue
         printf " [venv( $py_ver) :: $VIRTUAL_ENV]"
     end
-    set_color green --bold
-    printf "\n "
+end
+
+function prompt_vim_mode
+    switch $fish_bind_mode
+        case default
+            set_color --bold red
+            printf " <|NOR|>"
+        case insert
+            set_color --bold green
+            printf " <|INS|>"
+        case replace_one
+            set_color --bold blue
+            printf " <|REP|>"
+        case visual
+            set_color --bold magenta
+            printf " <|VIS|>"
+        case '*'
+            set_color --bold red
+            printf " <|???|>"
+    end
 end
 
 function fish_prompt
     prompt_basic
     prompt_git
     prompt_python
+    prompt_vim_mode
+
+    set_color green --bold
+    printf "\n "
     set_color normal
 end
 
