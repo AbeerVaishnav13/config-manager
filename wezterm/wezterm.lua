@@ -27,62 +27,33 @@ config.quit_when_all_windows_are_closed = true
 config.scrollback_lines = 100000
 
 -- Keymaps
+local map_key = function(key, mods, act_id, opts)
+	local keymap = {}
+	keymap.key = key
+	keymap.mods = mods
+
+	local action_obj = wezterm.action[act_id]
+	if type(action_obj) == "string" then
+		keymap.action = action_obj
+	else
+		keymap.action = action_obj(opts)
+	end
+
+	return keymap
+end
+
 config.keys = {
-	{
-		key = "w",
-		mods = "CMD",
-		action = wezterm.action.CloseCurrentPane({ confirm = true }),
-	},
-	{
-		key = "v",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "s",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "z",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.TogglePaneZoomState,
-	},
-	{
-		key = "h",
-		mods = "CMD|CTRL",
-		action = wezterm.action.RotatePanes("CounterClockwise"),
-	},
-	{
-		key = "k",
-		mods = "CMD|CTRL",
-		action = wezterm.action.RotatePanes("Clockwise"),
-	},
-	{
-		key = "h",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.ActivatePaneDirection("Left"),
-	},
-	{
-		key = "k",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.ActivatePaneDirection("Right"),
-	},
-	{
-		key = "u",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.ActivatePaneDirection("Up"),
-	},
-	{
-		key = "j",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.ActivatePaneDirection("Down"),
-	},
-	{
-		key = " ",
-		mods = "CTRL",
-		action = wezterm.action.ActivateCommandPalette,
-	},
+	map_key("w", "CMD", "CloseCurrentPane", { confirm = true }),
+	map_key("v", "CMD|SHIFT", "SplitVertical", { domain = "CurrentPaneDomain" }),
+	map_key("s", "CMD|SHIFT", "SplitHorizontal", { domain = "CurrentPaneDomain" }),
+	map_key("h", "CMD|CTRL", "RotatePanes", "CounterClockwise"),
+	map_key("k", "CMD|CTRL", "RotatePanes", "Clockwise"),
+	map_key("h", "CMD|SHIFT", "ActivatePaneDirection", "Left"),
+	map_key("k", "CMD|SHIFT", "ActivatePaneDirection", "Right"),
+	map_key("u", "CMD|SHIFT", "ActivatePaneDirection", "Up"),
+	map_key("j", "CMD|SHIFT", "ActivatePaneDirection", "Down"),
+	map_key("z", "CMD|SHIFT", "TogglePaneZoomState"),
+	map_key(" ", "CTRL", "ActivateCommandPalette"),
 }
 
 return config
