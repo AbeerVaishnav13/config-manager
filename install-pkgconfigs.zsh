@@ -1,39 +1,51 @@
 #!/bin/zsh
 
+check="%F{green}✓%f"
+warning="%F{yellow}%f"
+download="%F{blue}%f"
+database_add="%F{green}%f"
+makedir="%F{blue}%f"
+changedir="%F{blue}%f"
+gitclone="%F{blue}%f"
+
+print_info() {
+    print -P "%F{magenta}$1%f"
+}
+
 ####### Install homebrew #######
 if [ -d "/opt/homebrew/" ]
 then
-    print -P "%F{magenta}Homebrew already exists.%f %F{yellow}%f"
-    print -P "%F{magenta}Proceeding without install...%f %F{green}✓%f"
+    print_info "Homebrew already exists. $warning"
+    print_info "Proceeding without install... $check"
 else
-    print -P "%F{magenta}Installing Homebrew...%f %F{blue}%f"
+    print_info "Installing Homebrew... $download"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
 fi
 
 
 ####### Install packages #######
 # Install Packages
-print -P "\n%F{magenta}Adding Homebrew tap for Nerd-Fonts...%f %F{blue}%f"
+print_info "\nAdding Homebrew tap for Nerd-Fonts... $database_add"
 /opt/homebrew/bin/brew tap homebrew/cask-fonts
 
-print -P "\n%F{magenta}Installing Git...%f %F{blue}%f"
+print_info "\nInstalling Git... $download"
 /opt/homebrew/bin/brew install git
 
-if [ ! -d "$HOM#/Dev" ]
+if [ ! -d "$HOME/Dev" ]
 then
-    print -P "\n%F{magenta}Making $HOME/Dev...%f %F{blue}%f"
+    print_info "\nMaking $HOME/Dev... $makedir"
     mkdir -p "$HOME/Dev"
 fi
-print -P "\n%F{magenta}Changing dir: $HOME/Dev...%f %F{blue}%f"
+print_info "\nChanging dir: $HOME/Dev... $changedir"
 cd "$HOME/Dev"
 
-print -P "\n%F{magenta}Cloning https://github.com/AbeerVaishnav13/config-manager.git...%f %F{blue}%f"
+print_info "\nCloning https://github.com/AbeerVaishnav13/config-manager.git... $gitclone"
 git clone https://github.com/AbeerVaishnav13/config-manager.git
 cd "config-manager"
 
-print -P "\n%F{magenta}Installing all packages...%f %F{blue}%f"
+print_info "\nInstalling all packages... $download"
 /opt/homebrew/bin/brew install fish wezterm neovim node gcc bat exa cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz amethyst keka git-delta font-caskaydia-cove-nerd-font
-print -P "\n%F{magenta}All packages installed!%f %F{green}✓%f"
+print_info "\nAll packages installed! $check"
 
 # Some optional packages
 # /opt/homebrew/bin/brew install zellij warp alacritty helix
@@ -42,12 +54,12 @@ print -P "\n%F{magenta}All packages installed!%f %F{green}✓%f"
 ####### Install LunarVim & Config #######
 if [ -f "$HOME/.local/bin/lvim" ]
 then
-    print -P "\n%F{magenta}LunarVim already installed.%f %F{yellow}%f"
-    print -P "%F{magenta}Proceeding without install...%f %F{green}✓%f\n"
+    print_info "\nLunarVim already installed. $warning"
+    print_info "Proceeding without install... $check\n"
 else
-    print -P "\n%F{magenta}Installing LunarVim...%f %F{blue}%f"
+    print_info "\nInstalling LunarVim... $download"
     LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
-    print -P "\n%F{magenta}LunarVim installed.%f %F{green}✓%f"
+    print_info "\nLunarVim installed. $check"
 fi
 
 
@@ -59,15 +71,15 @@ checkAndLink() {
     then
         if [ -L "$2/$1" ]
         then
-            print -P "%F{magenta}The symlink $2/$1 already exists.%f %F{yellow}%f\n"
+            print_info "The symlink $2/$1 already exists. $warning\n"
         else
-            print -P "%F{magenta}The directory $2/$1 already exists. Removing directory...%f %F{green}✓%f"
+            print_info "The directory $2/$1 already exists. Removing directory... $check"
             rm -r "$2/$1" 
-            print -P "%F{magenta}Linking $1 to $2/$1...%f %F{green}✓%f\n"
+            print_info "Linking $1 to $2/$1... $check\n"
             ln -Fs $PWD/$1 $2
         fi
     else
-        print -P "%F{magenta}Linking $1 to $2/$1...%f %F{green}✓%f\n"
+        print_info "Linking $1 to $2/$1... $check\n"
         ln -Fs $PWD/$1 $2
     fi
 }
