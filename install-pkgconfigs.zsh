@@ -1,42 +1,45 @@
 #!/bin/zsh
 
-check="%F{green}✓%f"
-warning="%F{yellow}%f"
-download="%F{blue}%f"
-ques="%F{blue}%f"
-database_add="%F{blue}%f"
-makedir="%F{blue}%f"
 changedir="%F{blue}%f"
+check="%F{green}✓%f"
+database="%F{blue}%f"
+download="%F{blue}%f"
 gitclone="%F{blue}%f"
+makedir="%F{blue}%f"
+package="%F{blue}📦%f"
+ques="%F{blue}%f"
 tools="%F{blue}%f"
+warning="%F{yellow}%f"
+
 config_dir="$HOME/.config"
+git_dest="$HOME/Dev"
 
 print_info() {
-    print -P "%F{magenta}$1%f"
+    print -P "%F{$1}$2%f"
 }
 
 ####### Install homebrew #######
 if [ -d "/opt/homebrew/" ]
 then
-    print_info "Homebrew already exists. $warning"
-    print_info "Proceeding without install... $check"
+    print_info "magenta" "==> Homebrew already exists. $warning"
+    print_info "magenta" "==> Proceeding without install... $check"
 else
-    print_info "Installing Homebrew... $download"
+    print_info "magenta" "==> Installing Homebrew... $download"
     zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
 fi
 
 
 ####### Install packages #######
 # Install Packages
-print_info "\nAdding Homebrew tap for Nerd-Fonts... $database_add"
+print_info "magenta" "\n==> Adding Homebrew tap for Nerd-Fonts... $database"
 /opt/homebrew/bin/brew tap homebrew/cask-fonts
 
-print_info "\nInstalling all packages... $download"
+print_info "magenta" "\n==> Installing all packages... $package"
 /opt/homebrew/bin/brew install fish wezterm neovim node gcc git bat exa cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz amethyst keka git-delta font-caskaydia-cove-nerd-font
-print_info "\nAll packages installed! $check"
+print_info "magenta" "\n==> All packages installed! $check"
 
 # Some optional packages
-print_info "\nInstalling optional packages...$download $ques [zellij,alacritty,helix]"
+print_info "magenta" "\n==> Installing optional packages...$download $ques [zellij,alacritty,helix]"
 read -q "REPLY?Do you want to install optional packages? (y/N): "
 if [ $REPLY = y ]
 then
@@ -47,37 +50,43 @@ fi
 ####### Install LunarVim & Config #######
 if [ -f "$HOME/.local/bin/lvim" ]
 then
-    print_info "\nLunarVim already installed. $warning"
-    print_info "Proceeding without install... $check\n"
+    print_info "magenta" "\n==> LunarVim already installed. $warning"
+    print_info "magenta" "==> Proceeding without install... $check\n"
 else
-    print_info "\nInstalling LunarVim... $download"
+    print_info "magenta" "\n==> Installing LunarVim... $download"
     LV_BRANCH='release-1.3/neovim-0.9'
     zsh -c "$(curl -s "https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh")"
-    print_info "\nLunarVim installed. $check"
+    print_info "magenta" "\n==> LunarVim installed. $check"
 fi
 
 
 ####### Setup Config files #######
 # Make config folder
-print_info "\nSetting up configuration files...$tools"
+print_info "magenta" "\n==> Setting up configuration files...$tools"
 if [ ! -d "$config_dir" ]
 then
-    print_info "\nCreating $config_dir...$check"
+    print_info "magenta" "\n==> Creating $config_dir...$check"
     mkdir -p "$config_dir"
 fi
 
 # Clone the config repo
-print_info "\nClone the config git-repo..."
-read "?Destination for git-repo (wrt. $HOME): " git_dest
+print_info "magenta" "\n==> Clone the config git-repo..."
+read "REPLY?Do you want to install the git-repo in $HOME/Dev (Y/n): "
+if [ $REPLY = n]
+then
+    read "?Destination for git-repo (w.r.t. $HOME dir): " git_repo_dir
+    git_dest="$HOME/$git_repo_dir"
+fi
+
 if [ ! -d "$HOME/$git_dest" ]
 then
-    print_info "\nMaking $HOME/$git_dest... $makedir"
+    print_info "magenta" "\n==> Making $HOME/$git_dest... $makedir"
     mkdir -p "$HOME/$git_dest"
 fi
-print_info "Changing dir: $HOME/$git_dest... $changedir"
+print_info "magenta" "==> Changing dir: $HOME/$git_dest... $changedir"
 cd "$HOME/$git_dest"
 
-print_info "Cloning https://github.com/AbeerVaishnav13/config-manager.git... $gitclone"
+print_info "magenta" "==> Cloning https://github.com/AbeerVaishnav13/config-manager.git... $gitclone"
 git clone https://github.com/AbeerVaishnav13/config-manager.git
 cd "config-manager"
 
@@ -86,15 +95,15 @@ checkAndLink() {
     then
         if [ -L "$2/$1" ]
         then
-            print_info "\nThe symlink $2/$1 already exists. $warning"
+            print_info "magenta" "\n==> The symlink $2/$1 already exists. $warning"
         else
-            print_info "\nThe directory $2/$1 already exists. Removing directory... $check"
+            print_info "magenta" "\n==> The directory $2/$1 already exists. Removing directory... $check"
             rm -r "$2/$1" 
-            print_info "Linking $1 to $2/$1... $check"
+            print_info "magenta" "==> Linking $1 to $2/$1... $check"
             ln -Fs $PWD/$1 $2
         fi
     else
-        print_info "\nLinking $1 to $2/$1... $check"
+        print_info "magenta" "\n==> Linking $1 to $2/$1... $check"
         ln -Fs $PWD/$1 $2
     fi
 }
@@ -108,7 +117,7 @@ checkAndLink "lvim" "$config_dir"
 checkAndLink "wezterm" "$config_dir"
 
 # Setup optional configs
-print_info "\nInstalling optional configs...$tools $ques [zellij,alacritty,helix]"
+print_info "magenta" "\n==> Installing optional configs...$tools $ques [zellij,alacritty,helix]"
 read -q "REPLY?Do you want to install optional configs? (y/N): "
 if [ $REPLY = y ]
 then
@@ -117,4 +126,4 @@ then
     checkAndLink "helix" "$config_dir"
 fi
 
-print_info "\n\n...\n...\n...\nThe system and dev-env is fully setup! 🚀"
+print_info "green" "\n\n==> The system and dev-env is fully setup! 🚀"
