@@ -48,32 +48,35 @@ print_info "magenta" "\n==> Removed all configuration files. $check"
 ####### Remove git-repo #######
 print_info "magenta" "\n\n==> Removing config-manager git-repo...$warning"
 print -P "==> The default install location is set as: %F{yellow}$git_dest%f."
-read -q "REPLY?Is this correct? (Y/n): "
+read -q "REPLY?Is this correct? (y/N): "
 
-if [ $REPLY = n ]
+if [ $REPLY = y ]
 then
+    print ""
+else
     print ""
     read "?Location for git-repo on the system (path to top-level dir w.r.t $HOME dir): " git_repo_dir
     git_dest="$HOME/$git_repo_dir/config-manager"
 fi
 
-print_info "red" "==> You're going to delete: %F{yellow}$git_dest%f"
+print_info "red" "\n\n==> [Confirmation: (1/2)] You're going to delete: %F{yellow}$git_dest%f"
 read -q "REPLY?Is this correct? (y/N): "
 
-if [ $REPLY = y ]
-then
-    sudo rm -r $git_dest
-else
-    read "?Enter correct location (path to top-level dir w.r.t $HOME dir): " git_repo_dir
-    git_dest="$HOME/$git_repo_dir/config-manager"
-fi
-
-print_info "red" "==> You're going to delete: %F{yellow}$git_dest%f"
-read -q "REPLY?Is this correct? (y/N): "
 if [ $REPLY = y ]
 then
     print_info "red" "\nDeleting the repo at: %F{yellow}$git_dest%f"
     sudo rm -r $git_dest
+else
+    read "?Enter correct location (path to top-level dir w.r.t $HOME dir): " git_repo_dir
+    git_dest="$HOME/$git_repo_dir/config-manager"
+
+    print_info "red" "\n\n==> [Confirmation: (2/2)] You're going to delete: %F{yellow}$git_dest%f"
+    read -q "REPLY?Is this correct? (y/N): "
+    if [ $REPLY = y ]
+    then
+        print_info "red" "\nDeleting the repo at: %F{yellow}$git_dest%f"
+        sudo rm -r $git_dest
+    fi
 fi
 
 print_info "green" "\n\n==> Config-manager uninstalled successfully $check"
