@@ -66,7 +66,7 @@ then
     print_info "\nMaking $git_dest... $makedir"
     mkdir -p "$HOME/$git_dest"
 fi
-print_info "\nChanging dir: $HOME/$git_dest... $changedir"
+print_info "Changing dir: $HOME/$git_dest... $changedir"
 cd "$HOME/$git_dest"
 
 print_info "Cloning https://github.com/AbeerVaishnav13/config-manager.git... $gitclone"
