@@ -126,7 +126,6 @@ abbr rspro "cd $HOME/Documents/Coding/rust-projs/"
 abbr rspro "cd $HOME/Documents/Coding/ziglang"
 
 # App abbrs
-abbr btop "bpytop"
 abbr jl "jupyter lab"
 abbr lg "lazygit"
 abbr m "math"
