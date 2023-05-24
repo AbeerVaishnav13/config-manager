@@ -71,7 +71,6 @@ checkAndLink "bat" "$HOME/.config"
 checkAndLink "fish" "$HOME/.config"
 checkAndLink "lazygit" "$HOME/.config"
 checkAndLink "wezterm" "$HOME/.config"
-checkAndLink "install-pkgconfigs.zsh" "$HOME/.config"
 
 # Setup optional configs
 # checkAndLink ".warp" "$HOME"
