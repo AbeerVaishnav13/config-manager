@@ -63,7 +63,7 @@ print_info "\nClone the config git-repo..."
 read "?Destination for git-repo (wrt. $HOME): " git_dest
 if [ ! -d "$HOME/$git_dest" ]
 then
-    print_info "\nMaking $git_dest... $makedir"
+    print_info "\nMaking $HOME/$git_dest... $makedir"
     mkdir -p "$HOME/$git_dest"
 fi
 print_info "Changing dir: $HOME/$git_dest... $changedir"
