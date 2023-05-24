@@ -6,7 +6,7 @@ tools="%F{blue}%f"
 warning="%F{yellow}%f"
 
 config_dir="$HOME/.config"
-git_dest="$HOME/Dev"
+git_dest="$HOME/Dev/config-manager"
 
 
 print_info() {
@@ -48,7 +48,27 @@ read -q "REPLY?Is this correct? (Y/n): "
 if [ $REPLY = n ]
 then
     print ""
-    read "?Location for git-repo on the system (w.r.t $HOME dir): " git_repo_dir
-    git_dest="$HOME/$git_repo_dir"
+    read "?Location for git-repo on the system (path to top-level dir w.r.t $HOME dir): " git_repo_dir
+    git_dest="$HOME/$git_repo_dir/config-manager"
 fi
-sudo rm -r $git_dest
+
+print_info "red" "You're going to delete: %F{yellow}$git_dest%f"
+read -q "REPLY?Is this correct? (y/N): "
+
+if [ $REPLY = y ]
+then
+    sudo rm -r $git_dest
+else
+    read "?Enter correct location (path to top-level dir w.r.t $HOME dir): " git_repo_dir
+    git_dest="$HOME/$git_repo_dir/config-manager"
+fi
+
+print_info "red" "You're going to delete: %F{yellow}$git_dest%f"
+read -q "REPLY?Is this correct? (y/N): "
+if [ $REPLY = y ]
+then
+    print_info "red" "\nDeleting the repo at: %F{yellow}$git_dest%f"
+    sudo rm -r $git_dest
+fi
+
+print_info "green" "\n\nConfig-manager uninstalled successfully $check"
