@@ -23,7 +23,7 @@ function prompt_basic
 
     set_color red --bold
     printf "⟨"
-    set_color yellow
+    set_color yellow --bold
     printf "ϕ" 
     set_color red --bold
     printf "|"
