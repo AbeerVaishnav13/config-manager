@@ -71,8 +71,8 @@ fi
 
 # Clone the config repo
 print_info "magenta" "\n==> Clone the config git-repo..."
-read "REPLY?Do you want to install the git-repo in $HOME/Dev (y/N): "
-if [ $REPLY = y ]
+read -q "REPLY?Do you want to install the git-repo in $git_dest? (y/N): "
+if [ $REPLY != y ]
 then
     read "?Destination for git-repo (w.r.t. $HOME dir): " git_repo_dir
     git_dest="$HOME/$git_repo_dir"
@@ -80,10 +80,10 @@ fi
 
 if [ ! -d "$git_dest" ]
 then
-    print_info "magenta" "\n==> Making $HOME/$git_dest... $makedir"
+    print_info "magenta" "\n==> Making $git_dest... $makedir"
     mkdir -p $git_dest
 fi
-print_info "magenta" "==> Changing dir: $HOME/$git_dest... $changedir"
+print_info "magenta" "==> Changing dir: $git_dest... $changedir"
 cd $git_dest
 
 print_info "magenta" "==> Cloning https://github.com/AbeerVaishnav13/config-manager.git... $gitclone"
