@@ -78,13 +78,13 @@ then
     git_dest="$HOME/$git_repo_dir"
 fi
 
-if [ ! -d "$HOME/$git_dest" ]
+if [ ! -d "$git_dest" ]
 then
     print_info "magenta" "\n==> Making $HOME/$git_dest... $makedir"
-    mkdir -p "$HOME/$git_dest"
+    mkdir -p $git_dest
 fi
 print_info "magenta" "==> Changing dir: $HOME/$git_dest... $changedir"
-cd "$HOME/$git_dest"
+cd $git_dest
 
 print_info "magenta" "==> Cloning https://github.com/AbeerVaishnav13/config-manager.git... $gitclone"
 git clone https://github.com/AbeerVaishnav13/config-manager.git
