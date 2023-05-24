@@ -3,10 +3,12 @@
 check="%F{green}✓%f"
 warning="%F{yellow}%f"
 download="%F{blue}%f"
+ques="%F{blue}%f"
 database_add="%F{blue}%f"
 makedir="%F{blue}%f"
 changedir="%F{blue}%f"
 gitclone="%F{blue}%f"
+tools="%F{blue}%f"
 config_dir="$HOME/.config"
 
 print_info() {
@@ -34,7 +36,12 @@ print_info "\nInstalling all packages... $download"
 print_info "\nAll packages installed! $check"
 
 # Some optional packages
-# /opt/homebrew/bin/brew install zellij warp alacritty helix
+print_info "\nInstalling optional packages...$download $ques [zellij,alacritty,helix]"
+read -q "REPLY?Do you want to install optional packages? (y/N): "
+if [ $REPLY = y ]
+then
+    /opt/homebrew/bin/brew install zellij alacritty helix
+fi
 
 
 ####### Install LunarVim & Config #######
@@ -52,6 +59,7 @@ fi
 
 ####### Setup Config files #######
 # Make config folder
+print_info "\nSetting up configuration files...$tools"
 if [ ! -d "$config_dir" ]
 then
     print_info "\nCreating $config_dir...$check"
@@ -78,15 +86,15 @@ checkAndLink() {
     then
         if [ -L "$2/$1" ]
         then
-            print_info "The symlink $2/$1 already exists. $warning\n"
+            print_info "\nThe symlink $2/$1 already exists. $warning"
         else
-            print_info "The directory $2/$1 already exists. Removing directory... $check"
+            print_info "\nThe directory $2/$1 already exists. Removing directory... $check"
             rm -r "$2/$1" 
-            print_info "Linking $1 to $2/$1... $check\n"
+            print_info "Linking $1 to $2/$1... $check"
             ln -Fs $PWD/$1 $2
         fi
     else
-        print_info "Linking $1 to $2/$1... $check\n"
+        print_info "\nLinking $1 to $2/$1... $check"
         ln -Fs $PWD/$1 $2
     fi
 }
@@ -100,7 +108,13 @@ checkAndLink "lvim" "$config_dir"
 checkAndLink "wezterm" "$config_dir"
 
 # Setup optional configs
-# checkAndLink ".warp" "$HOME"
-# checkAndLink "alacritty" "$config_dir"
-# checkAndLink "zellij" "$config_dir"
-# checkAndLink "helix" "$config_dir"
+print_info "\nInstalling optional configs...$tools $ques [zellij,alacritty,helix]"
+read -q "REPLY?Do you want to install optional configs? (y/N): "
+if [ $REPLY = y ]
+then
+    checkAndLink "alacritty" "$config_dir"
+    checkAndLink "zellij" "$config_dir"
+    checkAndLink "helix" "$config_dir"
+fi
+
+print_info "\n\n...\n...\n...\nThe system and dev-env is fully setup! 🚀"
