@@ -67,6 +67,7 @@ then
     print_info "red" "\nDeleting the repo at: %F{yellow}$git_dest%f"
     sudo rm -r $git_dest
 else
+    print ""
     read "?Enter correct location (path to top-level dir w.r.t $HOME dir): " git_repo_dir
     git_dest="$HOME/$git_repo_dir/config-manager"
 
