@@ -89,7 +89,7 @@ print_info "magenta" "==> Changing dir: $git_dest... $changedir"
 cd $git_dest
 
 print_info "magenta" "==> Cloning https://github.com/AbeerVaishnav13/config-manager.git... $gitclone"
-git clone https://github.com/AbeerVaishnav13/config-manager.git
+git clone git@github.com:AbeerVaishnav13/config-manager.git
 cd "config-manager"
 
 checkAndLink() {
