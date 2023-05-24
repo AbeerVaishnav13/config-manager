@@ -71,8 +71,8 @@ fi
 
 # Clone the config repo
 print_info "magenta" "\n==> Clone the config git-repo..."
-read "REPLY?Do you want to install the git-repo in $HOME/Dev (Y/n): "
-if [ $REPLY = n]
+read "REPLY?Do you want to install the git-repo in $HOME/Dev (y/N): "
+if [ $REPLY = y ]
 then
     read "?Destination for git-repo (w.r.t. $HOME dir): " git_repo_dir
     git_dest="$HOME/$git_repo_dir"
