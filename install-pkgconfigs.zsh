@@ -82,6 +82,8 @@ if [ ! -d "$git_dest" ]
 then
     print_info "magenta" "\n==> Making $git_dest... $makedir"
     mkdir -p $git_dest
+else
+    print "\n"
 fi
 print_info "magenta" "==> Changing dir: $git_dest... $changedir"
 cd $git_dest

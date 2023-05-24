@@ -21,12 +21,12 @@ checkAndUnlink() {
     fi
 }
 
-print_info "magenta" "Uninstalling config-manager...\n"
-print_info "red" "Are you sure, you want to uninstall everything? $warning"
+print_info "magenta" "==> Uninstalling config-manager...\n"
+print_info "red" "==> Are you sure, you want to uninstall everything? $warning"
 read -q "REPLY?Response (Y/n): "
 
 ####### Remove config files #######
-print_info "magenta" "\n\nRemoving all configuration files...$warning"
+print_info "magenta" "\n\n==> Removing all configuration files...$warning"
 
 checkAndUnlink "bat"
 checkAndUnlink "btop"
@@ -38,11 +38,11 @@ checkAndUnlink "wezterm"
 checkAndUnlink "alacritty"
 checkAndUnlink "zellij"
 
-print_info "magenta" "\nRemoved all configuration files. $check"
+print_info "magenta" "\n==> Removed all configuration files. $check"
 
 ####### Remove git-repo #######
-print_info "magenta" "\n\nRemoving config-manager git-repo...$warning"
-print -P "The default install location is set as: %F{yellow}$git_dest%f."
+print_info "magenta" "\n\n==> Removing config-manager git-repo...$warning"
+print -P "==> The default install location is set as: %F{yellow}$git_dest%f."
 read -q "REPLY?Is this correct? (Y/n): "
 
 if [ $REPLY = n ]
@@ -52,7 +52,7 @@ then
     git_dest="$HOME/$git_repo_dir/config-manager"
 fi
 
-print_info "red" "You're going to delete: %F{yellow}$git_dest%f"
+print_info "red" "==> You're going to delete: %F{yellow}$git_dest%f"
 read -q "REPLY?Is this correct? (y/N): "
 
 if [ $REPLY = y ]
@@ -63,7 +63,7 @@ else
     git_dest="$HOME/$git_repo_dir/config-manager"
 fi
 
-print_info "red" "You're going to delete: %F{yellow}$git_dest%f"
+print_info "red" "==> You're going to delete: %F{yellow}$git_dest%f"
 read -q "REPLY?Is this correct? (y/N): "
 if [ $REPLY = y ]
 then
@@ -71,4 +71,4 @@ then
     sudo rm -r $git_dest
 fi
 
-print_info "green" "\n\nConfig-manager uninstalled successfully $check"
+print_info "green" "\n\n==> Config-manager uninstalled successfully $check"
