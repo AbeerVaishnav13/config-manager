@@ -23,7 +23,12 @@ checkAndUnlink() {
 
 print_info "magenta" "==> Uninstalling config-manager...\n"
 print_info "red" "==> Are you sure, you want to uninstall everything? $warning"
-read -q "REPLY?Response (Y/n): "
+read -q "REPLY?Response (y/N): "
+
+if [ $REPLY = n ]
+then
+    exit
+fi
 
 ####### Remove config files #######
 print_info "magenta" "\n\n==> Removing all configuration files...$warning"
