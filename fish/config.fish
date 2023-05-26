@@ -105,7 +105,7 @@ set PATH $HOME/Documents/Coding/ziglang/ $PATH
 set PATH /Library/TeX/texbin/ $PATH
 
 # Set man pager
-# set -x MANPAGER "bat --theme catppuccin-mocha"
+set -x MANPAGER "bat --theme gruvbox-hard"
 
 # Aliases
 # Rust CLI alternative programs
@@ -114,48 +114,44 @@ alias la="exa -lah"
 alias ll="exa -lh"
 alias ls="exa"
 alias lt="exa -laht"
+# alias rm="rip" # Not aliasing as recommended in the git-repo
 
 # Abbreviations
 # Coding and Dir abbrs
-abbr aq "cd $HOME/Documents/AQ/"
-abbr conf "cd $HOME/Documents/Coding/config-manager/"
-abbr uni "cd $HOME/Documents/Uni stuff/"
-abbr pypro "cd $HOME/Documents/Coding/Python-projs/"
-abbr zigpro "cd $HOME/Documents/Coding/zig-projs/"
-abbr rspro "cd $HOME/Documents/Coding/rust-projs/"
-abbr rspro "cd $HOME/Documents/Coding/ziglang"
+abbr aq     "cd $HOME/Documents/AQ/"
+abbr conf   "cd $HOME/Dev/config-manager/"
 
 # App abbrs
-abbr jl "jupyter lab"
-abbr lg "lazygit"
-abbr m "math"
-abbr st "speedtest"
+abbr jl   "jupyter lab"
+abbr lg   "lazygit"
+abbr m    "math"
+abbr st   "speedtest"
 abbr vifm "vifm ."
-abbr vim "lvim"
+abbr vim  "lvim"
 
 # Git abbrs
-abbr gs "git status"
+abbr gs  "git status"
 abbr gst "git stash"
 abbr gsa "git stash apply"
 abbr gsl "git stash list"
 abbr gsd "git stash drop"
-abbr gd "git diff"
-abbr gp "git pull"
+abbr gd  "git diff"
+abbr gp  "git pull"
 abbr gcm "git commit -m"
 abbr gpo "git push origin"
-abbr ga "git add"
-abbr gc "git checkout"
-abbr gb "git branch"
-abbr gr "git restore"
-abbr gl "git log | bat --plain --theme catppuccin-mocha"
-abbr gf "git fetch"
+abbr ga  "git add"
+abbr gc  "git checkout"
+abbr gb  "git branch"
+abbr gr  "git restore"
+abbr gl  "git log | bat --plain --theme catppuccin-mocha"
+abbr gf  "git fetch"
 
 # Zellij abbrs
-abbr zh "zellij -s home"
-abbr zs "zellij -s"
-abbr za "zellij attach"
-abbr zl "zellij list-sessions"
-abbr zr "zellij run --"
+abbr zh  "zellij -s home"
+abbr zs  "zellij -s"
+abbr za  "zellij attach"
+abbr zl  "zellij list-sessions"
+abbr zr  "zellij run --"
 abbr zrf "zellij run -f --"
 
 function init_conda
