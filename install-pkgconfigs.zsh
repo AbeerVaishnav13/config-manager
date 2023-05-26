@@ -35,7 +35,7 @@ print_info "magenta" "\n==> Adding Homebrew tap for Nerd-Fonts... $database"
 /opt/homebrew/bin/brew tap homebrew/cask-fonts
 
 print_info "magenta" "\n==> Installing all packages... $package"
-/opt/homebrew/bin/brew install fish wezterm neovim node gcc git bat exa cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz amethyst keka git-delta font-caskaydia-cove-nerd-font
+/opt/homebrew/bin/brew install fish wezterm neovim node gcc git bat exa cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz amethyst keka git-delta speedtest-cli rm-improved vifm font-caskaydia-cove-nerd-font
 print_info "magenta" "\n==> All packages installed! $check"
 
 # Some optional packages
@@ -101,7 +101,7 @@ checkAndLink() {
             print_info "magenta" "\n==> The symlink $2/$1 already exists. $warning"
         else
             print_info "magenta" "\n==> The directory $2/$1 already exists. Removing directory... $check"
-            rm -r "$2/$1" 
+            rip "$2/$1" 
             print_info "magenta" "==> Linking $1 to $2/$1... $check"
             ln -Fs $PWD/$1 $2
         fi
