@@ -13,37 +13,13 @@ print_info() {
     print -P "%F{$1}$2%f"
 }
 
-checkAndUnlink() {
-    if [ -L "$config_dir/$1" ]
-    then
-        print_info "red" "\n==> Unlinking $config_dir/$1... $check"
-        unlink "$config_dir/$1"
-    fi
-}
-
 print_info "magenta" "==> Uninstalling config-manager...\n"
 print_info "red" "==> Are you sure, you want to uninstall everything? $warning"
 read -q "REPLY?Response (y/N): "
-
 if [ $REPLY = n ]
 then
     exit
 fi
-
-####### Remove config files #######
-print_info "magenta" "\n\n==> Removing all configuration files...$warning"
-
-checkAndUnlink "bat"
-checkAndUnlink "btop"
-checkAndUnlink "lvim"
-checkAndUnlink "lazygit"
-checkAndUnlink "helix"
-checkAndUnlink "fish"
-checkAndUnlink "wezterm"
-checkAndUnlink "alacritty"
-checkAndUnlink "zellij"
-
-print_info "magenta" "\n==> Removed all configuration files. $check"
 
 ####### Remove git-repo #######
 print_info "magenta" "\n\n==> Removing config-manager git-repo...$warning"
@@ -77,7 +53,34 @@ else
     then
         print_info "red" "\n==> Deleting the repo at: %F{yellow}$git_dest%f"
         sudo rm -r $git_dest
+    else
+        print_info "red" "\n\n==> Config-manager not uninstalled! $warning"
+        exit
     fi
 fi
+
+checkAndUnlink() {
+    if [ -L "$config_dir/$1" ]
+    then
+        print_info "red" "\n==> Unlinking $config_dir/$1... $check"
+        unlink "$config_dir/$1"
+    fi
+}
+
+####### Remove config files #######
+print_info "magenta" "\n\n==> Removing all configuration files...$warning"
+
+checkAndUnlink "bat"
+checkAndUnlink "btop"
+checkAndUnlink "lvim"
+checkAndUnlink "lazygit"
+checkAndUnlink "helix"
+checkAndUnlink "fish"
+checkAndUnlink "wezterm"
+checkAndUnlink "alacritty"
+checkAndUnlink "zellij"
+
+print_info "magenta" "\n==> Removed all configuration files. $check"
+
 
 print_info "green" "\n\n==> Config-manager uninstalled successfully $check"
