@@ -74,6 +74,7 @@ print_info "magenta" "\n==> Clone the config git-repo..."
 read -q "REPLY?Do you want to install the git-repo in $git_dest? (y/N): "
 if [ $REPLY != y ]
 then
+    print ""
     read "?Destination for git-repo (w.r.t. $HOME dir): " git_repo_dir
     git_dest="$HOME/$git_repo_dir"
 fi
