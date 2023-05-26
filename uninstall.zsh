@@ -60,6 +60,8 @@ else
     fi
 fi
 
+print_info "magenta" "\n==> Removed git-repo at $git_dest. $check"
+
 checkAndUnlink() {
     if [ -L "$config_dir/$1" ]
     then
