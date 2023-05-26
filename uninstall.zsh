@@ -24,7 +24,7 @@ fi
 
 ####### Remove git-repo #######
 print_info "magenta" "\n\n==> Removing config-manager git-repo...$warning"
-print_info "white" "==> The default install location is set as: %F{yellow}$git_dest%f."
+print_info "red" "==> The default install location is set as: %F{yellow}$git_dest%f."
 read -q "REPLY?Is this correct? (y/N): "
 
 if [ $REPLY = y ]
