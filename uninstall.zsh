@@ -24,7 +24,7 @@ fi
 
 ####### Remove git-repo #######
 print_info "magenta" "\n\n==> Removing config-manager git-repo...$warning"
-print_info "red" "==> The default install location is set as: %F{yellow}$git_dest%f."
+print_info "red" "==> [Confirmation: (1/3)] The default install location is set as: %F{yellow}$git_dest%f."
 read -q "REPLY?Is this correct? (y/N): "
 
 if [ $REPLY = y ]
@@ -36,7 +36,7 @@ else
     git_dest="$HOME/$git_repo_dir/config-manager"
 fi
 
-print_info "red" "\n\n==> [Confirmation: (1/2)] You're going to delete: %F{yellow}$git_dest%f"
+print_info "red" "\n\n==> [Confirmation: (2/3)] You're going to delete: %F{yellow}$git_dest%f"
 read -q "REPLY?Is this correct? (y/N): "
 
 if [ $REPLY = y ]
@@ -48,7 +48,7 @@ else
     read "?Enter correct location (path to top-level dir w.r.t $HOME dir): " git_repo_dir
     git_dest="$HOME/$git_repo_dir/config-manager"
 
-    print_info "red" "\n\n==> [Confirmation: (2/2)] You're going to delete: %F{yellow}$git_dest%f"
+    print_info "red" "\n\n==> [Confirmation: (3/3)] You're going to delete: %F{yellow}$git_dest%f"
     read -q "REPLY?Is this correct? (y/N): "
     if [ $REPLY = y ]
     then
