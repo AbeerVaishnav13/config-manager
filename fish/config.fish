@@ -115,6 +115,7 @@ alias ll="exa -lh"
 alias ls="exa"
 alias lt="exa -laht"
 # alias rm="rip" # Not aliasing as recommended in the git-repo
+alias rm="printf 'Dont use `rm`. Use `rip` instead.\n'"
 
 # Abbreviations
 # Coding and Dir abbrs
