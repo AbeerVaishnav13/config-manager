@@ -18,6 +18,7 @@ print_info "red" "==> Are you sure, you want to uninstall everything? $warning"
 read -q "REPLY?Response (y/N): "
 if [ $REPLY = n ]
 then
+    print_info "red" "\n\n==> Config-manager not uninstalled! $warning"
     exit
 fi
 
