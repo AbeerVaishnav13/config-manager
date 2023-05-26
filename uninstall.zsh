@@ -47,7 +47,7 @@ print_info "magenta" "\n==> Removed all configuration files. $check"
 
 ####### Remove git-repo #######
 print_info "magenta" "\n\n==> Removing config-manager git-repo...$warning"
-print -P "==> The default install location is set as: %F{yellow}$git_dest%f."
+print_info "white" "==> The default install location is set as: %F{yellow}$git_dest%f."
 read -q "REPLY?Is this correct? (y/N): "
 
 if [ $REPLY = y ]
@@ -64,7 +64,7 @@ read -q "REPLY?Is this correct? (y/N): "
 
 if [ $REPLY = y ]
 then
-    print_info "red" "\nDeleting the repo at: %F{yellow}$git_dest%f"
+    print_info "red" "\n==> Deleting the repo at: %F{yellow}$git_dest%f"
     sudo rm -r $git_dest
 else
     print ""
@@ -75,7 +75,7 @@ else
     read -q "REPLY?Is this correct? (y/N): "
     if [ $REPLY = y ]
     then
-        print_info "red" "\nDeleting the repo at: %F{yellow}$git_dest%f"
+        print_info "red" "\n==> Deleting the repo at: %F{yellow}$git_dest%f"
         sudo rm -r $git_dest
     fi
 fi
