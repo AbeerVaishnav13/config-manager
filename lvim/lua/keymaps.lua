@@ -31,7 +31,9 @@ lvim.keys.normal_mode["<leader>lg"] = "<cmd>lua require('lvim.core.terminal').la
 lvim.keys.normal_mode["<leader>lb"] = "<cmd>Telescope buffers<cr>"
 vim.keymap.set("n", "S", ":%s///gI<left><left><left><left>", { desc = "Search & Replace" })
 -- stylua: ignore
-vim.keymap.set("n", "R", ":%s/\\<<c-r><c-w>\\>/<c-r><c-w>/gI<left><left><left>", { desc = "Search & Replace (cursor word)" })
+vim.keymap.set("n", "R", ":%s/\\<<c-r><c-w>\\>//gI<left><left><left>", { desc = "Search & Replace (cursor word)" })
+-- stylua: ignore
+vim.keymap.set( "v", "R", "\"1y:%s/<c-r>1//gI<left><left><left>", { desc = "Search & Replace (visual select)" })
 
 ---- LSP keymaps
 lvim.lsp.buffer_mappings.normal_mode["<leader>kk"] = { vim.lsp.buf.hover, "Show Documentation" }
