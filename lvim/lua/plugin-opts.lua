@@ -179,7 +179,7 @@ formatters.setup({
 	{ command = "rustfmt", filetypes = { "rust" } },
 	{ command = "stylua", filetypes = { "lua" } },
 	{ command = "yapf", filetypes = { "python" } },
-	{ command = "yamlfmt", filetypes = { "yaml" } },
+	-- { command = "yamlfmt", filetypes = { "yaml" } },
 	{ command = "zigfmt", filetypes = { "zig" } },
 })
 
