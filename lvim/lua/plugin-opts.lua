@@ -172,12 +172,14 @@ lvim.builtin.treesitter.ensure_installed = {
 
 -- Null-ls formatters setup
 local formatters = require("lvim.lsp.null-ls.formatters")
+-- P(formatters.list_supported("yaml"))
 formatters.setup({
 	{ command = "fnlfmt", filetypes = { "fennel" } },
 	{ command = "latexindent", filetypes = { "tex" } },
 	{ command = "rustfmt", filetypes = { "rust" } },
 	{ command = "stylua", filetypes = { "lua" } },
 	{ command = "yapf", filetypes = { "python" } },
+	{ command = "yamlfmt", filetypes = { "yaml" } },
 	{ command = "zigfmt", filetypes = { "zig" } },
 })
 
