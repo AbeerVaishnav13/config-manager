@@ -124,6 +124,7 @@ abbr conf   "cd $HOME/Dev/config-manager/"
 
 # App abbrs
 abbr jl   "jupyter lab"
+abbr jn   "jupyter notebook"
 abbr lg   "lazygit"
 abbr m    "math"
 abbr st   "speedtest"
