@@ -106,26 +106,8 @@ lvim.plugins = {
 		end,
 	},
 	{
-		"Exafunction/codeium.vim",
-		config = function()
-			vim.g.codeium_enabled = false
-			vim.g.codeium_disable_bindings = 1
-			vim.keymap.set("i", "<C-l>", function()
-				return vim.fn["codeium#Accept"]()
-			end, { expr = true })
-			vim.keymap.set("i", "<C-]>", function()
-				return vim.fn["codeium#CycleCompletions"](1)
-			end, { expr = true })
-			vim.keymap.set("i", "<C-[>", function()
-				return vim.fn["codeium#CycleCompletions"](-1)
-			end, { expr = true })
-			vim.keymap.set("i", "<C-x>", function()
-				return vim.fn["codeium#Clear"]()
-			end, { expr = true })
-			vim.keymap.set("i", "<C-s>", function()
-				return vim.fn["codeium#Complete"]()
-			end, { expr = true })
-		end,
+		"github/copilot.vim",
+		event = "InsertEnter",
 	},
 }
 
@@ -179,7 +161,7 @@ formatters.setup({
 	{ command = "latexindent", filetypes = { "tex" } },
 	{ command = "rustfmt", filetypes = { "rust" } },
 	{ command = "stylua", filetypes = { "lua" } },
-	{ command = "yapf", filetypes = { "python" } },
+	{ command = "black", filetypes = { "python" } },
 	-- { command = "yamlfmt", filetypes = { "yaml" } },
 	{ command = "zigfmt", filetypes = { "zig" } },
 })
