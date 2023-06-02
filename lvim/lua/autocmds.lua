@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 local markdown_open = function()
 	local filename = utils.get_curr_filename()
 	vim.api.nvim_exec2("!open " .. filename .. ".pdf", { output = true })
-	vim.api.nvim_exec2("!open -a Alacritty", { output = true })
+	vim.api.nvim_exec2("!open -a WezTerm", { output = true })
 end
 
 local run_pandoc = function()
