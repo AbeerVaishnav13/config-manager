@@ -8,6 +8,7 @@ lvim.lsp.installer.setup.ensure_installed = {
 	"lua_ls",
 	"marksman",
 	"pylyzer",
+	"pyright",
 	"rust_analyzer",
 	"yamlls",
 	"zls",

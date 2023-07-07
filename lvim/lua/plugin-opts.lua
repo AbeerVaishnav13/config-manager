@@ -162,7 +162,8 @@ formatters.setup({
 	{ command = "rustfmt", filetypes = { "rust" } },
 	{ command = "stylua", filetypes = { "lua" } },
 	{ command = "black", filetypes = { "python" } },
-	-- { command = "yamlfmt", filetypes = { "yaml" } },
+	{ command = "isort", filetypes = { "python" } },
+	{ command = "yamlfmt", filetypes = { "yaml" } },
 	{ command = "zigfmt", filetypes = { "zig" } },
 })
 
