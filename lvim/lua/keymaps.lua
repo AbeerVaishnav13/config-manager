@@ -32,6 +32,11 @@ lvim.keys.normal_mode["<leader>lb"] = { "<cmd>Telescope buffers<cr>", { desc = "
 lvim.keys.normal_mode["<leader>lg"] =
 	{ "<cmd>lua require('lvim.core.terminal').lazygit_toggle()<cr>", { desc = "Open LazyGit" } }
 
+-- Show current filepath
+vim.keymap.set("n", "<leader>cf", function()
+	print(utils.get_curr_filename(true))
+end, { desc = "Get current filepath" })
+
 ---- Search & Replace keymaps
 vim.keymap.set("n", "S", ":%s///gI<left><left><left><left>", { desc = "Search & Replace" })
 -- stylua: ignore
