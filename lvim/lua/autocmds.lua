@@ -15,23 +15,21 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 local markdown_open = function()
-	local filename = utils.get_curr_filename()
+	local filename = utils.get_curr_filename(false)
 	vim.api.nvim_exec2("!open " .. filename .. ".pdf", { output = true })
 	vim.api.nvim_exec2("!open -a WezTerm", { output = true })
 end
 
 local run_pandoc = function()
-	local filename = utils.get_curr_filename()
+	local filename = utils.get_curr_filename(false)
 	local cmd = "!pandoc -o " .. filename .. ".pdf " .. filename .. ".md"
 	local stdout = vim.api.nvim_exec2(cmd, { output = true })
 
-	local has_pdflatex = #vim.split(stdout.output, "pdflatex", { plain = true }) == 1
-	if not has_pdflatex then
+	if not stdout.output:find("pdflatex", 1, true) then
 		error("Install 'basictex' or any other distribution of pdflatex for Mac.")
 	end
 
-	local has_error = #vim.split(stdout.output, "Error", { plain = true }) > 1
-	if has_error then
+	if stdout.output:find("Error", 1, true) then
 		local bufnr = vim.api.nvim_create_buf(true, true)
 		vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, vim.split(stdout.output, "\n", { plain = true }))
 
