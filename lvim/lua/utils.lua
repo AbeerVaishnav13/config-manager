@@ -108,8 +108,13 @@ M.show_messages = function()
 	vim.api.nvim_feedkeys("G", "n", false)
 end
 
-M.get_curr_filename = function()
-	return vim.split(vim.fn.expand("%:p", true), ".", { plain = true })[1]
+M.get_curr_filename = function(with_ext)
+	local curr_filename = vim.fn.expand("%:p", true)
+	if with_ext then
+		return curr_filename
+	else
+		return vim.split(curr_filename, ".", { plain = true })[1]
+	end
 end
 
 M.markdown_notes_template = function()
@@ -140,6 +145,18 @@ M.markdown_notes_template = function()
 		"",
 	}
 	vim.api.nvim_buf_set_lines(0, 0, 0, true, header_info)
+end
+
+M.get_buf_vtext = function()
+	local a_orig = vim.fn.getreg("a")
+	local mode = vim.fn.mode()
+	if mode ~= "v" and mode ~= "V" then
+		vim.cmd([[normal! gv]])
+	end
+	vim.cmd([[silent! normal! "ay]])
+	local text = vim.fn.getreg("a")
+	vim.fn.setreg("a", a_orig)
+	return text
 end
 
 vim.api.nvim_create_user_command("MdNotesTemplate", "lua require('utils').markdown_notes_template()", {})
