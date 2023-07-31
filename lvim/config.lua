@@ -15,3 +15,6 @@ reload("autocmds")
 
 -- Additional utility functions
 reload("utils")
+
+-- Interactive Python functionality
+reload("jupyter_tools")
