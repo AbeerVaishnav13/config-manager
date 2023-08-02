@@ -3,11 +3,12 @@ local wezterm = require("wezterm-bindings")
 
 local jupyter = {}
 
-jupyter._check_strings = {
+jupyter._pre_init_packages = {
 	matplotlib = [[import matplotlib.pyplot as plt
 import os
 os.environ["ITERMPLOT"] = "rv"
-plt.rcParams["backend"] = "module://itermplot"]],
+plt.rcParams["backend"] = "module://itermplot"
+]],
 }
 
 jupyter._get_python_in_path = function()
@@ -65,21 +66,14 @@ jupyter.setup_install = function()
 end
 
 jupyter._init_plots = function()
-	local plot_package = vim.fn.input({
-		prompt = "Enter name of plotting package [default: matplotlib]: ",
-	})
-
-	if plot_package == "" then
-		plot_package = "matplotlib"
+	for py_package, snippet in pairs(jupyter._pre_init_packages) do
+		print("Initialized: " .. py_package)
+		vim.fn.setreg("+", snippet)
+		jupyter.execute()
 	end
-
-	local snippet = jupyter._check_strings[plot_package]
-	vim.fn.setreg("+", snippet)
-	jupyter.execute()
 end
 
 jupyter.start = function(pane_direction)
-	jupyter._handled_check_strings = {}
 	jupyter._ipython_pane_direction = pane_direction
 	local out = wezterm.split_pane(jupyter._ipython_pane_direction, "ipython")
 
@@ -94,20 +88,52 @@ jupyter.execute = function()
 	wezterm.activate_pane_by_id(jupyter._ipython_pane_id)
 end
 
--- jupyter._preprocess_buf_vtext = function(vtext)
--- 	for check_str, snippet in pairs(jupyter._check_strings) do
--- 		if vtext:find(check_str, 1, true) and not jupyter._handled_check_strings[check_str] then
--- 			table.insert(jupyter._handled_check_strings, true)
--- 			vim.fn.setreg('"', snippet)
--- 			jupyter.execute()
--- 		end
--- 	end
--- end
+jupyter._visual_select_lines = function(start_line, end_line)
+	local num_lines = end_line - start_line
+	local key_seq = "V" .. tostring(num_lines) .. "j"
+	vim.api.nvim_feedkeys(key_seq, "n", false)
+	P(key_seq)
+end
 
-jupyter.get_buf_vtext_and_execute = function()
+jupyter.execute_within_magic_comments = function()
+	local curr = vim.api.nvim_win_get_cursor(0)
+	local prev = vim.fn.searchpos("# *%%", "bW")
+	local next = vim.fn.searchpos("# *%%", "W")
+	local total = vim.api.nvim_buf_line_count(0)
+	P(prev)
+	P(curr)
+	P(next)
+	P(total)
+
+	if curr[1] == next[1] then
+		P("curr == next")
+		vim.api.nvim_win_set_cursor(0, { curr[1] + 1, 0 })
+		jupyter.execute_within_magic_comments()
+	elseif curr[1] == prev[1] then
+		P("curr == prev")
+		vim.api.nvim_win_set_cursor(0, { curr[1] + 1, 0 })
+		jupyter._visual_select_lines(curr[1] + 1, next[1] - 1)
+		jupyter.copy_buf_vtext_and_execute()
+	elseif prev[1] == 0 and prev[2] == 0 then
+		P("prev == {0, 0}")
+		vim.api.nvim_win_set_cursor(0, { curr[1] + 1, 0 })
+		jupyter._visual_select_lines(curr[1] + 1, next[1] - 1)
+		jupyter.copy_buf_vtext_and_execute()
+	elseif prev[1] < curr[1] and curr[1] < next[1] then
+		P("prev < curr < next")
+		vim.api.nvim_win_set_cursor(0, { prev[1] + 1, 0 })
+		jupyter._visual_select_lines(prev[1] + 1, next[1] - 1)
+		jupyter.copy_buf_vtext_and_execute()
+	elseif next[1] == 0 and next[2] == 0 then
+		P("next == {0, 0}")
+		vim.api.nvim_win_set_cursor(0, { curr[1], 0 })
+		jupyter._visual_select_lines(curr[1], total + 1)
+		jupyter.copy_buf_vtext_and_execute()
+	end
+end
+
+jupyter.copy_buf_vtext_and_execute = function()
 	local buf_vtext = utils.get_buf_vtext()
-	-- jupyter._preprocess_buf_vtext(buf_vtext)
-	-- vim.api.nvim_feedkeys("y", "v", false)
 	vim.fn.setreg("+", buf_vtext)
 	jupyter.execute()
 end
@@ -116,4 +142,15 @@ vim.api.nvim_create_user_command("JupyterSetupInstall", jupyter.setup_install, {
 vim.api.nvim_create_user_command("JupyterStart", function()
 	jupyter.start("right")
 end, {})
-vim.keymap.set("v", "<leader>jr", jupyter.get_buf_vtext_and_execute, { desc = "Run visual selection (Jupyter)" })
+vim.keymap.set(
+	"v",
+	"<leader>jr",
+	jupyter.copy_buf_vtext_and_execute,
+	{ desc = "Execute code within visual selection (Jupyter)" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>jj",
+	jupyter.execute_within_magic_comments,
+	{ desc = "Execute code between two magic comments" }
+)
