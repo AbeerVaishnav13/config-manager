@@ -101,27 +101,23 @@ jupyter.execute_within_magic_comments = function()
 	local next = vim.fn.searchpos("# *%%", "W")
 	local total = vim.api.nvim_buf_line_count(0)
 
+	local start_line = 0
+	local end_line = 0
+
 	if curr[1] == next[1] then
-		-- P("curr == next")
 		vim.api.nvim_win_set_cursor(0, { curr[1] + 1, 0 })
 		jupyter.execute_within_magic_comments()
 	elseif curr[1] == prev[1] then
-		-- P("curr == prev")
-		-- P({ curr[1], next[1] - 1 })
-		jupyter.get_buf_text_range_and_execute(curr[1], next[1] - 1)
+		start_line, end_line = curr[1], next[1] - 1
 	elseif prev[1] == 0 and prev[2] == 0 then
-		-- P("prev == {0, 0}")
-		-- P({ curr[1], next[1] - 1 })
-		jupyter.get_buf_text_range_and_execute(curr[1], next[1] - 1)
+		start_line, end_line = curr[1], next[1] - 1
 	elseif prev[1] < curr[1] and curr[1] < next[1] then
-		-- P("prev < curr < next")
-		-- P({ prev[1], next[1] - 1 })
-		jupyter.get_buf_text_range_and_execute(prev[1], next[1] - 1)
+		start_line, end_line = prev[1], next[1] - 1
 	elseif next[1] == 0 and next[2] == 0 then
-		-- P("next == {0, 0}")
-		-- P({ curr[1], total })
-		jupyter.get_buf_text_range_and_execute(curr[1] - 1, total)
+		start_line, end_line = curr[1] - 1, total
 	end
+
+	jupyter.get_buf_text_range_and_execute(start_line, end_line)
 end
 
 jupyter.get_text_buf_range = function(start_line, end_line)
