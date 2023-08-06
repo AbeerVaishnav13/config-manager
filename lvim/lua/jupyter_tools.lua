@@ -32,7 +32,7 @@ jupyter._check_and_install_itermplot = function()
 	if not out.output:find("Traceback", 1, true) then
 		print("Python package - itermplot, already installed!")
 	else
-		vim.api.nvim_exec2("!" .. python_exe .. " -m pip install -U itermplot", { output = false })
+		vim.api.nvim_exec2("!" .. python_exe .. " -m pip install -U itermplot==0.5", { output = false })
 		print("Python package - itermplot, installed successfully!")
 	end
 end
@@ -69,7 +69,7 @@ jupyter._init_plots = function()
 	for py_package, snippet in pairs(jupyter._pre_init_packages) do
 		print("Initialized: " .. py_package)
 		vim.fn.setreg("+", snippet)
-		jupyter.execute()
+		wezterm.send_text_from_clipboard(jupyter._ipython_pane_id)
 	end
 end
 
@@ -100,36 +100,43 @@ jupyter.execute_within_magic_comments = function()
 	local prev = vim.fn.searchpos("# *%%", "bW")
 	local next = vim.fn.searchpos("# *%%", "W")
 	local total = vim.api.nvim_buf_line_count(0)
-	P(prev)
-	P(curr)
-	P(next)
-	P(total)
 
 	if curr[1] == next[1] then
-		P("curr == next")
+		-- P("curr == next")
 		vim.api.nvim_win_set_cursor(0, { curr[1] + 1, 0 })
 		jupyter.execute_within_magic_comments()
 	elseif curr[1] == prev[1] then
-		P("curr == prev")
-		vim.api.nvim_win_set_cursor(0, { curr[1] + 1, 0 })
-		jupyter._visual_select_lines(curr[1] + 1, next[1] - 1)
-		jupyter.copy_buf_vtext_and_execute()
+		-- P("curr == prev")
+		-- P({ curr[1], next[1] - 1 })
+		jupyter.get_buf_text_range_and_execute(curr[1], next[1] - 1)
 	elseif prev[1] == 0 and prev[2] == 0 then
-		P("prev == {0, 0}")
-		vim.api.nvim_win_set_cursor(0, { curr[1] + 1, 0 })
-		jupyter._visual_select_lines(curr[1] + 1, next[1] - 1)
-		jupyter.copy_buf_vtext_and_execute()
+		-- P("prev == {0, 0}")
+		-- P({ curr[1], next[1] - 1 })
+		jupyter.get_buf_text_range_and_execute(curr[1], next[1] - 1)
 	elseif prev[1] < curr[1] and curr[1] < next[1] then
-		P("prev < curr < next")
-		vim.api.nvim_win_set_cursor(0, { prev[1] + 1, 0 })
-		jupyter._visual_select_lines(prev[1] + 1, next[1] - 1)
-		jupyter.copy_buf_vtext_and_execute()
+		-- P("prev < curr < next")
+		-- P({ prev[1], next[1] - 1 })
+		jupyter.get_buf_text_range_and_execute(prev[1], next[1] - 1)
 	elseif next[1] == 0 and next[2] == 0 then
-		P("next == {0, 0}")
-		vim.api.nvim_win_set_cursor(0, { curr[1], 0 })
-		jupyter._visual_select_lines(curr[1], total + 1)
-		jupyter.copy_buf_vtext_and_execute()
+		-- P("next == {0, 0}")
+		-- P({ curr[1], total })
+		jupyter.get_buf_text_range_and_execute(curr[1] - 1, total)
 	end
+end
+
+jupyter.get_text_buf_range = function(start_line, end_line)
+	local lines = vim.api.nvim_buf_get_lines(0, start_line, end_line, true)
+	local full_string = ""
+	for _, line in ipairs(lines) do
+		full_string = full_string .. line .. "\n"
+	end
+	return full_string
+end
+
+jupyter.get_buf_text_range_and_execute = function(start_line, end_line)
+	local buf_text = jupyter.get_text_buf_range(start_line, end_line)
+	vim.fn.setreg("+", buf_text)
+	jupyter.execute()
 end
 
 jupyter.copy_buf_vtext_and_execute = function()
