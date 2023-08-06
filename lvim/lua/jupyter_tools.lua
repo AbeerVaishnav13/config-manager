@@ -88,13 +88,6 @@ jupyter.execute = function()
 	wezterm.activate_pane_by_id(jupyter._ipython_pane_id)
 end
 
-jupyter._visual_select_lines = function(start_line, end_line)
-	local num_lines = end_line - start_line
-	local key_seq = "V" .. tostring(num_lines) .. "j"
-	vim.api.nvim_feedkeys(key_seq, "n", false)
-	P(key_seq)
-end
-
 jupyter.execute_within_magic_comments = function()
 	local curr = vim.api.nvim_win_get_cursor(0)
 	local prev = vim.fn.searchpos("# *%%", "bW")
@@ -114,7 +107,11 @@ jupyter.execute_within_magic_comments = function()
 	elseif prev[1] < curr[1] and curr[1] < next[1] then
 		start_line, end_line = prev[1], next[1] - 1
 	elseif next[1] == 0 and next[2] == 0 then
-		start_line, end_line = curr[1] - 1, total
+		if curr[1] == prev[1] + 1 then
+			start_line, end_line = curr[1] - 1, total
+		elseif curr[1] > prev[1] + 1 then
+			start_line, end_line = prev[1], total
+		end
 	end
 
 	jupyter.get_buf_text_range_and_execute(start_line, end_line)
