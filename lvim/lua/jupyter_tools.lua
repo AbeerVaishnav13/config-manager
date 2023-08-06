@@ -119,10 +119,7 @@ end
 
 jupyter.get_text_buf_range = function(start_line, end_line)
 	local lines = vim.api.nvim_buf_get_lines(0, start_line, end_line, true)
-	local full_string = ""
-	for _, line in ipairs(lines) do
-		full_string = full_string .. line .. "\n"
-	end
+	local full_string = table.concat(lines, "\n")
 	return full_string
 end
 
