@@ -151,3 +151,12 @@ vim.keymap.set(
 	jupyter.execute_within_magic_comments,
 	{ desc = "Execute code between two magic comments" }
 )
+vim.keymap.set("n", "<leader>jn", function()
+	vim.fn.searchpos("# *%%", "W")
+	vim.cmd([[normal zz]])
+end, { desc = "Goto beginning of next jupyter cell" })
+
+vim.keymap.set("n", "<leader>jp", function()
+	vim.fn.searchpos("# *%%", "bW")
+	vim.cmd([[normal zz]])
+end, { desc = "Goto beginning of prev jupyter cell" })
