@@ -7,6 +7,7 @@ lvim.lsp.installer.setup.ensure_installed = {
 	"jsonls",
 	"lua_ls",
 	"marksman",
+	"ruff_lsp",
 	"pylyzer",
 	"rust_analyzer",
 	"yamlls",
