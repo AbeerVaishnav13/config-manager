@@ -98,7 +98,7 @@ set PATH /usr/bin $PATH
 set PATH /usr/local/bin $PATH
 set PATH /opt/homebrew/bin $PATH
 set PATH /opt/homebrew/opt/llvm/bin/ $PATH
-set PATH $HOME/.local/share/nvim/mason/bin/ $PATH
+set PATH $HOME/.local/share/lvim/mason/bin/ $PATH
 set PATH $HOME/.local/bin/ $PATH
 set PATH $HOME/Documents/Coding/palace/build/bin/ $PATH
 set PATH $HOME/Dev/ziglang/ $PATH
