@@ -7,8 +7,8 @@ lvim.lsp.installer.setup.ensure_installed = {
 	"jsonls",
 	"lua_ls",
 	"marksman",
+	"pyright",
 	"ruff_lsp",
-	"pylyzer",
 	"rust_analyzer",
 	"yamlls",
 	"zls",
@@ -16,6 +16,7 @@ lvim.lsp.installer.setup.ensure_installed = {
 
 lvim.lsp.installer.setup.automatic_installation.exclude = {
 	"azure_pipelines_ls",
+	"pylyzer",
 }
 
 local lsp_config = require("lspconfig")
