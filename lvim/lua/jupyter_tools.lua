@@ -76,7 +76,7 @@ jupyter._init_plots = function()
 	end
 end
 
-jupyter._search_magic_comment_and_add_highlight = function(winnr, bufnr, start_pos)
+jupyter._search_magic_comment_and_add_highlight = function(winnr, bufnr)
 	local wraparound = false
 	while not wraparound do
 		local next = vim.fn.searchpos("# *%%", "")
@@ -96,9 +96,8 @@ end
 jupyter.add_highlight_at_cell_boundary = function()
 	local bufnr = vim.api.nvim_get_current_buf()
 	local winnr = vim.api.nvim_get_current_win()
-	local start_pos = vim.api.nvim_win_get_cursor(winnr)
 	vim.api.nvim_win_set_cursor(winnr, { 1, 0 })
-	jupyter._search_magic_comment_and_add_highlight(winnr, bufnr, start_pos)
+	jupyter._search_magic_comment_and_add_highlight(winnr, bufnr)
 
 	vim.api.nvim_create_autocmd("BufWritePost", {
 		group = jupyter._augroup,
@@ -108,7 +107,7 @@ jupyter.add_highlight_at_cell_boundary = function()
 			vim.api.nvim_win_set_cursor(winnr, { 1, 0 })
 			vim.api.nvim_buf_clear_namespace(bufnr, jupyter._ns_id, 0, -1)
 			jupyter._search_magic_comment_and_add_highlight(winnr, bufnr)
-			vim.api.nvim_win_set_cursor(winnr, { init_pos[1], init_pos[2] - 1 })
+			vim.api.nvim_win_set_cursor(winnr, init_pos)
 		end,
 	})
 end
