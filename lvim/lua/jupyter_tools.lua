@@ -11,6 +11,9 @@ plt.rcParams["backend"] = "module://itermplot"
 ]],
 }
 
+jupyter._ns_id = vim.api.nvim_create_namespace("JupyterHighlight")
+jupyter._augroup = vim.api.nvim_create_augroup("JupyterAugroup", { clear = true })
+
 jupyter._get_python_in_path = function()
 	local out1 = vim.api.nvim_exec2("!python", { output = true })
 	local out2 = vim.api.nvim_exec2("!python3", { output = true })
@@ -73,14 +76,63 @@ jupyter._init_plots = function()
 	end
 end
 
+jupyter._search_magic_comment_and_add_highlight = function(winnr, bufnr, start_pos)
+	local wraparound = false
+	while not wraparound do
+		local next = vim.fn.searchpos("# *%%", "")
+		local curr = vim.api.nvim_win_get_cursor(winnr)
+
+		-- Set highlight
+		vim.api.nvim_buf_add_highlight(bufnr, jupyter._ns_id, "@text.note", next[1] - 1, 0, -1)
+
+		if next[1] == 1 and next[2] == 1 then
+			wraparound = true
+		end
+
+		vim.api.nvim_win_set_cursor(0, { curr[1] + 1, 0 })
+	end
+end
+
+jupyter.add_highlight_at_cell_boundary = function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local winnr = vim.api.nvim_get_current_win()
+	local start_pos = vim.api.nvim_win_get_cursor(winnr)
+	vim.api.nvim_win_set_cursor(winnr, { 1, 0 })
+	jupyter._search_magic_comment_and_add_highlight(winnr, bufnr, start_pos)
+
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		group = jupyter._augroup,
+		buffer = bufnr,
+		callback = function()
+			local init_pos = vim.api.nvim_win_get_cursor(winnr)
+			vim.api.nvim_win_set_cursor(winnr, { 1, 0 })
+			vim.api.nvim_buf_clear_namespace(bufnr, jupyter._ns_id, 0, -1)
+			jupyter._search_magic_comment_and_add_highlight(winnr, bufnr)
+			vim.api.nvim_win_set_cursor(winnr, { init_pos[1], init_pos[2] - 1 })
+		end,
+	})
+end
+
+jupyter.remove_highlight_at_cell_boundary = function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	vim.api.nvim_buf_clear_namespace(bufnr, jupyter._ns_id, 0, -1)
+	vim.api.nvim_clear_autocmds({ group = jupyter._augroup })
+end
+
 jupyter.start = function(pane_direction)
 	jupyter._ipython_pane_direction = pane_direction
 	local out = wezterm.split_pane(jupyter._ipython_pane_direction, "ipython")
 
 	start_idx, end_idx = out.output:find("[0-9]+")
 	jupyter._ipython_pane_id = tonumber(out.output:sub(start_idx, end_idx))
+	jupyter.add_highlight_at_cell_boundary()
 
 	jupyter._init_plots()
+end
+
+jupyter.stop = function()
+	jupyter.remove_highlight_at_cell_boundary()
+	wezterm.kill_pane(jupyter._ipython_pane_id)
 end
 
 jupyter.execute = function()
@@ -137,7 +189,18 @@ end
 
 vim.api.nvim_create_user_command("JupyterSetupInstall", jupyter.setup_install, {})
 vim.api.nvim_create_user_command("JupyterStart", function()
-	jupyter.start("right")
+	local pane_dir = vim.fn.input({
+		prompt = "Enter pane direction [default: right]: ",
+	})
+
+	if pane_dir == "" then
+		pane_dir = "right"
+	end
+
+	jupyter.start(pane_dir)
+end, {})
+vim.api.nvim_create_user_command("JupyterStop", function()
+	jupyter.stop()
 end, {})
 vim.keymap.set(
 	"v",

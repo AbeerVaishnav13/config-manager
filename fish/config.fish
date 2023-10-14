@@ -101,7 +101,7 @@ set PATH /opt/homebrew/opt/llvm/bin/ $PATH
 set PATH $HOME/.local/share/lvim/mason/bin/ $PATH
 set PATH $HOME/.local/bin/ $PATH
 set PATH $HOME/Documents/Coding/palace/build/bin/ $PATH
-set PATH $HOME/Dev/ziglang/ $PATH
+# set PATH $HOME/Dev/ziglang/ $PATH
 set PATH /Library/TeX/texbin/ $PATH
 
 # Set man pager
