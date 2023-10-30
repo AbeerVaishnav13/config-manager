@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/fish
+#!/bin/fish
 fish_vi_key_bindings
 
 set __fish_git_prompt_show_informative_status true
@@ -19,7 +19,7 @@ end
 
 function prompt_basic
     set_color magenta --bold
-    printf "[] "
+    printf "[] "
 
     set_color red --bold
     printf "⟨"
@@ -96,13 +96,10 @@ end
 # Set PATH variable
 set PATH /usr/bin $PATH
 set PATH /usr/local/bin $PATH
-set PATH /opt/homebrew/bin $PATH
-set PATH /opt/homebrew/opt/llvm/bin/ $PATH
 set PATH $HOME/.local/share/lvim/mason/bin/ $PATH
 set PATH $HOME/.local/bin/ $PATH
-set PATH $HOME/Documents/Coding/palace/build/bin/ $PATH
-# set PATH $HOME/Dev/ziglang/ $PATH
-set PATH /Library/TeX/texbin/ $PATH
+set PATH $HOME/Documents/personal-git-repos/wezterm/target/release $PATH
+set PATH $HOME/.cargo/bin $PATH
 
 # Set man pager
 set -x MANPAGER "bat --theme gruvbox-hard"
@@ -159,7 +156,8 @@ abbr zrf "zellij run -f --"
 function init_conda
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
-    eval /opt/homebrew/anaconda3/bin/conda "shell.fish" hook $argv | source
+    # eval /opt/homebrew/anaconda3/bin/conda "shell.fish" hook $argv | source
+    printf "conda not setup, please configure it first"
     # <<< conda initialize <<<
 end
 

@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local config = {}
 
 -- Configuring font
-config.font_size = 14
+config.font_size = 20
 config.font = wezterm.font({
 	family = "CaskaydiaCove Nerd Font",
 	weight = "DemiBold",
@@ -13,7 +13,7 @@ config.font = wezterm.font({
 config.color_scheme = "Catppuccin Mocha"
 
 -- Default shell
-config.default_prog = { "/opt/homebrew/bin/fish" }
+config.default_prog = { "/bin/fish" }
 
 -- Genearal options
 config.hide_tab_bar_if_only_one_tab = true
