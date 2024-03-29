@@ -119,8 +119,8 @@ alias rm="printf 'Dont use `rm`. Use `rip` instead.\n'"
 
 # Abbreviations
 # Coding and Dir abbrs
-abbr aq     "cd $HOME/Documents/AQ/"
-abbr conf   "cd $HOME/Dev/config-manager/"
+abbr aq   "cd $HOME/Documents/AQ/"
+abbr conf "cd $HOME/Dev/config-manager/"
 
 # App abbrs
 abbr jl   "jupyter lab"
@@ -130,6 +130,7 @@ abbr m    "math"
 abbr st   "speedtest"
 abbr vifm "vifm ."
 abbr vim  "lvim"
+alias nrfutil="$HOME/Dev/Frame-dev-tools/nrfutil"
 
 # Git abbrs
 abbr gs  "git status"
