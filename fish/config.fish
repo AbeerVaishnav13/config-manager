@@ -103,6 +103,8 @@ set PATH $HOME/.local/bin/ $PATH
 set PATH $HOME/Documents/Coding/palace/build/bin/ $PATH
 # set PATH $HOME/Dev/ziglang/ $PATH
 set PATH /Library/TeX/texbin/ $PATH
+# set PATH "/Volumes/Macintosh HD/Applications/ArmGNUToolchain/13.2.Rel1/aarch64-none-elf/bin/" $PATH
+set PATH "/Volumes/Macintosh HD/Applications/Nordic Semiconductor/bin/" $PATH
 
 # Set man pager
 set -x MANPAGER "bat --theme gruvbox-hard"
@@ -110,10 +112,10 @@ set -x MANPAGER "bat --theme gruvbox-hard"
 # Aliases
 # Rust CLI alternative programs
 alias cat="bat --theme catppuccin-mocha"
-alias la="exa -lah"
-alias ll="exa -lh"
-alias ls="exa"
-alias lt="exa -laht"
+alias la="eza -lah"
+alias ll="eza -lh"
+alias ls="eza"
+alias lt="eza -laht"
 # alias rm="rip" # Not aliasing as recommended in the git-repo
 alias rm="printf 'Dont use `rm`. Use `rip` instead.\n'"
 
@@ -130,7 +132,7 @@ abbr m    "math"
 abbr st   "speedtest"
 abbr vifm "vifm ."
 abbr vim  "lvim"
-alias nrfutil="$HOME/Dev/Frame-dev-tools/nrfutil"
+# alias nrfutil="$HOME/Dev/Frame-dev-tools/nrfutil"
 
 # Git abbrs
 abbr gs  "git status"
