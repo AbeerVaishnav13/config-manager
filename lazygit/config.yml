@@ -96,18 +96,18 @@ keybinding:
         togglePanel: '<tab>' # goto the next panel
         prevItem: '<up>' # go one line up
         nextItem: '<down>' # go one line down
-        prevItem-alt: 'k' # go one line up
-        nextItem-alt: 'j' # go one line down
+        prevItem-alt: 'o' # go one line up
+        nextItem-alt: 'a' # go one line down
         prevPage: ',' # go to next page in list
         nextPage: '.' # go to previous page in list
         gotoTop: '<' # go to top of list
         gotoBottom: '>' # go to bottom of list
         scrollLeft: 'H' # scroll left within list view
-        scrollRight: 'L' # scroll right within list view
+        scrollRight: 'E' # scroll right within list view
         prevBlock: '<left>' # goto the previous block / panel
         nextBlock: '<right>' # goto the next block / panel
         prevBlock-alt: 'h' # goto the previous block / panel
-        nextBlock-alt: 'l' # goto the next block / panel
+        nextBlock-alt: 'e' # goto the next block / panel
         jumpToBlock: ['1', '2', '3', '4', '5'] # goto the Nth block / panel
         nextMatch: 'n'
         prevMatch: 'N'
@@ -120,8 +120,8 @@ keybinding:
         confirm-alt1: 'y'
         remove: 'd'
         new: 'n'
-        edit: 'e'
-        openFile: 'o'
+        edit: '<c-e>'
+        openFile: 'O'
         scrollUpMain: '<pgup>' # main panel scroll up
         scrollDownMain: '<pgdown>' # main panel scroll down
         scrollUpMain-alt1: 'K' # main panel scroll up
@@ -142,7 +142,7 @@ keybinding:
         redo: '<c-z>'
         filteringMenu: '<c-s>'
         diffingMenu: 'W'
-        diffingMenu-alt: '<c-e>' # deprecated
+        # diffingMenu-alt: '<c-e>' # deprecated
         copyToClipboard: '<c-o>'
         submitEditorText: '<enter>'
         appendNewline: '<a-enter>'
