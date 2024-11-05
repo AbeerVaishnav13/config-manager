@@ -70,8 +70,8 @@ lvim.builtin.which_key.mappings["b"]["n"] = nil
 ---- global keymaps
 lvim.keys.visual_mode["<C-c>"] = { "<esc><cmd>noh<cr>", { desc = "Normal mode (no-highlight)" } }
 lvim.keys.visual_mode["i"] = { "k", { desc = "Move up" } }
-lvim.keys.visual_mode["j"] = { "j", { desc = "Move down" } }
-lvim.keys.visual_mode["k"] = { "h", { desc = "Move left" } }
+lvim.keys.visual_mode["k"] = { "j", { desc = "Move down" } }
+lvim.keys.visual_mode["j"] = { "h", { desc = "Move left" } }
 
 -- Normal/Visual --> Command mode
 ---- global keymaps
