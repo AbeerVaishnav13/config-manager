@@ -169,3 +169,6 @@ end
 function ff -a file -d "ff <file.edp>"
     eval "/usr/local/ff++/mpich3/bin/FreeFem++ $file -glut /usr/local/ff++/mpich3/bin/ffglut"
 end
+
+# Added by Antigravity
+fish_add_path /Users/abeervaishnav/.antigravity/antigravity/bin
