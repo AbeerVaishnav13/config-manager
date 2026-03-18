@@ -35,7 +35,7 @@ print_info "magenta" "\n==> Adding Homebrew tap for Nerd-Fonts... $database"
 /opt/homebrew/bin/brew tap homebrew/cask-fonts
 
 print_info "magenta" "\n==> Installing all packages... $package"
-/opt/homebrew/bin/brew install fish wezterm neovim node gcc git bat exa cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz amethyst keka git-delta speedtest-cli rm-improved vifm font-caskaydia-cove-nerd-font
+/opt/homebrew/bin/brew install fish wezterm neovim node gcc git bat eza cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz amethyst keka git-delta speedtest-cli rm-improved vifm font-caskaydia-cove-nerd-font
 print_info "magenta" "\n==> All packages installed! $check"
 
 # Some optional packages
@@ -44,19 +44,6 @@ read -q "REPLY?Do you want to install optional packages? (y/N): "
 if [ $REPLY = y ]
 then
     /opt/homebrew/bin/brew install zellij alacritty helix
-fi
-
-
-####### Install LunarVim & Config #######
-if [ -f "$HOME/.local/bin/lvim" ]
-then
-    print_info "magenta" "\n==> LunarVim already installed. $warning"
-    print_info "magenta" "==> Proceeding without install... $check\n"
-else
-    print_info "magenta" "\n==> Installing LunarVim... $download"
-    LV_BRANCH='release-1.3/neovim-0.9'
-    zsh -c "$(curl -s "https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh")"
-    print_info "magenta" "\n==> LunarVim installed. $check"
 fi
 
 
@@ -116,7 +103,20 @@ checkAndLink "bat" "$config_dir"
 checkAndLink "btop" "$config_dir"
 checkAndLink "fish" "$config_dir"
 checkAndLink "lazygit" "$config_dir"
-checkAndLink "lvim" "$config_dir"
+# LazyVim config needs to be linked as ~/.config/nvim
+if [ -d "$config_dir/nvim" ]; then
+    if [ -L "$config_dir/nvim" ]; then
+        print_info "magenta" "\n==> The symlink $config_dir/nvim already exists. $warning"
+    else
+        print_info "magenta" "\n==> The directory $config_dir/nvim already exists. Removing directory... $check"
+        rip "$config_dir/nvim"
+        print_info "magenta" "==> Linking lazyvim to $config_dir/nvim... $check"
+        ln -Fs $PWD/lazyvim $config_dir/nvim
+    fi
+else
+    print_info "magenta" "\n==> Linking lazyvim to $config_dir/nvim... $check"
+    ln -Fs $PWD/lazyvim $config_dir/nvim
+fi
 checkAndLink "wezterm" "$config_dir"
 
 # Setup optional configs
