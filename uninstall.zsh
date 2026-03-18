@@ -75,7 +75,7 @@ print_info "magenta" "\n\n==> Removing all configuration files...$warning"
 
 checkAndUnlink "bat"
 checkAndUnlink "btop"
-checkAndUnlink "lvim"
+checkAndUnlink "lazyvim"
 checkAndUnlink "lazygit"
 checkAndUnlink "helix"
 checkAndUnlink "fish"

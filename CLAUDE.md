@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What This Repo Is
 
 A personal macOS development environment configuration repository (dotfiles). It manages configurations for:
-- **LunarVim** (`lvim/`) — primary editor, the most complex part of this repo
+- **LazyVim** (`lazyvim/`) — primary editor (Neovim with LazyVim distribution)
 - **Fish shell** (`fish/`) — shell with custom prompt, aliases, and vi-mode keybindings
 - **Wezterm** (`wezterm/`) — terminal emulator with Lua config
 - **Zellij** (`zellij/`) — terminal multiplexer
@@ -25,7 +25,7 @@ There are no build, test, or lint commands — this is a configuration-only repo
 
 ## Key Layout
 
-Navigation keys are remapped for ergonomic comfort (easier to press than vim defaults). The critical remapping in LunarVim:
+Navigation keys are remapped for ergonomic comfort (easier to press than vim defaults). The critical remapping in LazyVim:
 
 | Key | Action (instead of default) |
 |-----|----------------------------|
@@ -37,20 +37,18 @@ Navigation keys are remapped for ergonomic comfort (easier to press than vim def
 
 When editing keymaps, always preserve this layout. Do not "fix" these to standard vim bindings.
 
-## LunarVim Architecture (`lvim/`)
+## LazyVim Architecture (`lazyvim/`)
 
-`config.lua` is the entry point — it sources all modules via a `reload()` utility from `lua/utils.lua`.
+Uses the standard LazyVim directory structure. Launched via `NVIM_APPNAME=lazyvim nvim`.
 
 | Module | Purpose |
 |--------|---------|
-| `lua/user-opts.lua` | Editor settings: colorscheme (Catppuccin Mocha), tabs, transparency |
-| `lua/keymaps.lua` | All custom keybindings; graphite-layout remaps |
-| `lua/plugin-opts.lua` | Plugin configuration (surround, neogen, treesitter, catppuccin, icon-picker) |
-| `lua/lsp-config.lua` | LSP setup for Python, Rust, Lua |
-| `lua/lsp-handlers.lua` | Custom LSP diagnostic/hover handlers |
-| `lua/autocmds.lua` | Autocommands and event hooks |
-| `lua/utils.lua` | Buffer/window helpers, cht.sh integration, transparency toggle |
-| `lua/jupyter_tools.lua` | IPython/Jupyter cell execution via Wezterm panes, matplotlib via itermplot |
+| `lua/config/options.lua` | Editor settings: tabs, scrolloff, colorcolumn |
+| `lua/config/keymaps.lua` | All custom keybindings; ergonomic nav remaps |
+| `lua/config/autocmds.lua` | Autocommands: markdown settings, pandoc, rename-with-qflist |
+| `lua/plugins/` | Plugin specs: colorscheme, editor, LSP, treesitter, formatting, UI |
+| `lua/utils.lua` | Buffer/window helpers, cht.sh integration, markdown template |
+| `lua/lsp-handlers.lua` | Custom LSP rename handler with quickfix list |
 
 ## Fish Shell (`fish/config.fish`)
 
@@ -58,10 +56,10 @@ When editing keymaps, always preserve this layout. Do not "fix" these to standar
 - `cat` → `bat`, `ls`/`ll`/`la` → `eza` variants
 - Git abbreviations: `ga`, `gb`, `gd`, `gp`, `gst`, etc.
 - Custom prompt shows: git branch, conda/venv env, vim mode indicator
-- PATH includes: Homebrew, LLVM, Mason (for LunarVim), TeX
+- PATH includes: Homebrew, LLVM, Mason (for LazyVim), TeX
 
 ## Consistency Rules
 
-- **Color scheme**: Catppuccin Mocha everywhere (LunarVim, Alacritty, Wezterm, btop)
+- **Color scheme**: Catppuccin Mocha everywhere (LazyVim, Alacritty, Wezterm, btop)
 - **Vi mode**: Enabled in Fish shell and all terminal tools
 - **Rust CLI tools**: Prefer over GNU equivalents (`bat` over `cat`, `eza` over `ls`, `fd` over `find`, `ripgrep` over `grep`)

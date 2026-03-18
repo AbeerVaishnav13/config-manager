@@ -98,7 +98,7 @@ set PATH /usr/bin $PATH
 set PATH /usr/local/bin $PATH
 set PATH /opt/homebrew/bin $PATH
 set PATH /opt/homebrew/opt/llvm/bin/ $PATH
-set PATH $HOME/.local/share/lvim/mason/bin/ $PATH
+set PATH $HOME/.local/share/lazyvim/mason/bin/ $PATH
 set PATH $HOME/.local/bin/ $PATH
 set PATH $HOME/Documents/Coding/palace/build/bin/ $PATH
 # set PATH $HOME/Dev/ziglang/ $PATH
@@ -131,7 +131,7 @@ abbr lg   "lazygit"
 abbr m    "math"
 abbr st   "speedtest"
 abbr vifm "vifm ."
-abbr vim  "lvim"
+abbr vim  "NVIM_APPNAME=lazyvim nvim"
 # alias nrfutil="$HOME/Dev/Frame-dev-tools/nrfutil"
 
 # Git abbrs
