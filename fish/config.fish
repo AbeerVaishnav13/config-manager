@@ -21,20 +21,14 @@ function prompt_basic
     set_color magenta --bold
     printf "[] "
 
-    set_color red --bold
-    printf "⟨"
-    set_color yellow --bold
-    printf "ϕ" 
-    set_color red --bold
-    printf "|"
-    set_color blue
-    printf (basename $PWD)
-    set_color red --bold
-    printf "|"
-    set_color cyan
-    printf "ψ"
-    set_color red --bold
-    printf "⟩"
+    printf "%s⟨%sϕ%s|%s%s%s|%sψ%s⟩" \
+        (set_color red --bold) \
+        (set_color yellow --bold) \
+        (set_color red --bold) \
+        (set_color blue) (basename $PWD) \
+        (set_color red --bold) \
+        (set_color cyan) \
+        (set_color red --bold)
 end
 
 function prompt_git
