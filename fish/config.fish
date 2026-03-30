@@ -8,7 +8,7 @@ set __fish_git_prompt_showstashstate true
 set __fish_git_prompt_describe_style describe
 set __fish_git_prompt_char_dirtystate ±
 set __fish_git_prompt_char_invalidstate ×
-set __fish_git_prompt_char_stashstate  
+set __fish_git_prompt_char_stashstate 
 
 function fish_greeting
     printf ""
@@ -115,42 +115,42 @@ alias rm="printf 'Dont use `rm`. Use `rip` instead.\n'"
 
 # Abbreviations
 # Coding and Dir abbrs
-abbr aq   "cd $HOME/Documents/AQ/"
+abbr aq "cd $HOME/Documents/AQ/"
 abbr conf "cd $HOME/Dev/config-manager/"
 
 # App abbrs
-abbr jl   "jupyter lab"
-abbr jn   "jupyter notebook"
-abbr lg   "lazygit"
-abbr m    "math"
-abbr st   "speedtest"
+abbr jl "jupyter lab"
+abbr jn "jupyter notebook"
+abbr lg lazygit
+abbr m math
+abbr st speedtest
 abbr vifm "vifm ."
-abbr vim  "NVIM_APPNAME=lazyvim nvim"
+abbr v "NVIM_APPNAME=lazyvim nvim"
 # alias nrfutil="$HOME/Dev/Frame-dev-tools/nrfutil"
 
 # Git abbrs
-abbr gs  "git status"
+abbr gs "git status"
 abbr gst "git stash"
 abbr gsa "git stash apply"
 abbr gsl "git stash list"
 abbr gsd "git stash drop"
-abbr gd  "git diff"
-abbr gp  "git pull"
+abbr gd "git diff"
+abbr gp "git pull"
 abbr gcm "git commit -m"
 abbr gpo "git push origin"
-abbr ga  "git add"
-abbr gc  "git checkout"
-abbr gb  "git branch"
-abbr gr  "git restore"
-abbr gl  "git log | bat --plain --theme catppuccin-mocha"
-abbr gf  "git fetch"
+abbr ga "git add"
+abbr gc "git checkout"
+abbr gb "git branch"
+abbr gr "git restore"
+abbr gl "git log | bat --plain --theme catppuccin-mocha"
+abbr gf "git fetch"
 
 # Zellij abbrs
-abbr zh  "zellij -s home"
-abbr zs  "zellij -s"
-abbr za  "zellij attach"
-abbr zl  "zellij list-sessions"
-abbr zr  "zellij run --"
+abbr zh "zellij -s home"
+abbr zs "zellij -s"
+abbr za "zellij attach"
+abbr zl "zellij list-sessions"
+abbr zr "zellij run --"
 abbr zrf "zellij run -f --"
 
 function init_conda
