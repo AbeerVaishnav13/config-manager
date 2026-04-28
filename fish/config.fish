@@ -175,3 +175,5 @@ set --export PATH $BUN_INSTALL/bin $PATH
 set -gx PATH $PATH /Users/abeervaishnav/.lmstudio/bin
 # End of LM Studio CLI section
 
+# Hermes Agent — ensure ~/.local/bin is on PATH
+fish_add_path "$HOME/.local/bin"
