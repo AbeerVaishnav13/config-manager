@@ -34,16 +34,21 @@ fi
 print_info "magenta" "\n==> Adding Homebrew tap for Nerd-Fonts... $database"
 /opt/homebrew/bin/brew tap homebrew/cask-fonts
 
-print_info "magenta" "\n==> Installing all packages... $package"
-/opt/homebrew/bin/brew install fish wezterm neovim node gcc git bat eza cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd marp-cli basictex klayout paraview zoom discord slack anaconda brave-browser xquartz amethyst keka git-delta speedtest-cli rm-improved vifm font-caskaydia-cove-nerd-font
-print_info "magenta" "\n==> All packages installed! $check"
+print_info "magenta" "\n==> Installing CLI packages... $package [fish neovim node gcc git bat eza cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd basictex keka git-delta rm-improved gh ffmpeg]"
+/opt/homebrew/bin/brew install fish neovim node gcc git bat eza cmake btop lazygit make pandoc stylua latexindent marksman par ripgrep fd basictex keka git-delta rm-improved gh ffmpeg curl 
+print_info "magenta" "\n==> All CLI packages installed! $check"
+
+# Cask packages
+print_info "magenta" "\n==> Installing cask packages...$download [wezterm discord klayout font-caskaydia-covefnerd-font amethyst aldente dockdoor whatsapp zoom google-chrome kicad lm-studio google-drive]"
+/opt/homebrew/bin/brew install --cask wezterm discord klayout font-caskaydia-covefnerd-font amethyst aldente dockdoor whatsapp zoom google-chrome kicad lm-studio google-drive
+print_info "magenta" "\n==> All cask packages installed! $check"
 
 # Some optional packages
-print_info "magenta" "\n==> Installing optional packages...$download $ques [zellij,alacritty,helix]"
+print_info "magenta" "\n==> Installing optional packages...$download $ques [zellij, alacritty, helix, paraview, marp-cli, slack, anaconda, brave-browser, speedtest-cli, vifm, xquartz]"
 read -q "REPLY?Do you want to install optional packages? (y/N): "
 if [ $REPLY = y ]
 then
-    /opt/homebrew/bin/brew install zellij alacritty helix
+    /opt/homebrew/bin/brew install zellij alacritty helix paraview marp-cli slack anaconda brave-browser speedtest-cli vifm xquartz
 fi
 
 
