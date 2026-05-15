@@ -119,8 +119,6 @@ abbr lg lazygit
 abbr m math
 abbr st speedtest
 abbr vifm "vifm ."
-abbr vim vim
-abbr v vim
 
 # Git abbrs
 abbr gs "git status"
