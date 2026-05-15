@@ -104,7 +104,8 @@ alias ll="eza -lh"
 alias ls="eza"
 alias lt="eza -laht"
 # alias rm="rip" # Not aliasing as recommended in the git-repo
-alias rm="printf 'Dont use `rm`. Use `rip` instead.\n'"
+alias rm="printf 'Dont use `rm`. Use `rip` instead.\\n'"
+alias bat="batcat"
 
 # Abbreviations
 # Coding and Dir abbrs
@@ -140,3 +141,7 @@ abbr gf "git fetch"
 
 # Hermes Agent — ensure ~/.local/bin is on PATH
 fish_add_path "$HOME/.local/bin"
+
+if status is-interactive
+    keychain --eval --agents ssh id_ed25519 | source
+end
