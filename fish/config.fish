@@ -21,7 +21,7 @@ function prompt_basic
     set_color magenta --bold
     printf "[] "
 
-    printf "%s⟨%sϕ%s|%s%s%s|%sψ%s⟩" \
+    printf "%s⟨%s🪨%s|%s%s%s|%s🪨%s⟩" \
         (set_color red --bold) \
         (set_color yellow --bold) \
         (set_color red --bold) \
@@ -90,15 +90,8 @@ end
 # Set PATH variable
 set PATH /usr/bin $PATH
 set PATH /usr/local/bin $PATH
-set PATH /opt/homebrew/bin $PATH
-set PATH /opt/homebrew/opt/llvm/bin/ $PATH
 set PATH $HOME/.local/share/lazyvim/mason/bin/ $PATH
 set PATH $HOME/.local/bin/ $PATH
-set PATH $HOME/Documents/Coding/palace/build/bin/ $PATH
-# set PATH $HOME/Dev/ziglang/ $PATH
-set PATH /Library/TeX/texbin/ $PATH
-# set PATH "/Volumes/Macintosh HD/Applications/ArmGNUToolchain/13.2.Rel1/aarch64-none-elf/bin/" $PATH
-set PATH "/Volumes/Macintosh HD/Applications/Nordic Semiconductor/bin/" $PATH
 
 # Set man pager
 set -x MANPAGER "bat --theme gruvbox-hard"
@@ -125,8 +118,8 @@ abbr lg lazygit
 abbr m math
 abbr st speedtest
 abbr vifm "vifm ."
-abbr v "NVIM_APPNAME=lazyvim nvim"
-# alias nrfutil="$HOME/Dev/Frame-dev-tools/nrfutil"
+abbr vim vim
+abbr v vim
 
 # Git abbrs
 abbr gs "git status"
@@ -144,36 +137,6 @@ abbr gb "git branch"
 abbr gr "git restore"
 abbr gl "git log | bat --plain --theme catppuccin-mocha"
 abbr gf "git fetch"
-
-# Zellij abbrs
-abbr zh "zellij -s home"
-abbr zs "zellij -s"
-abbr za "zellij attach"
-abbr zl "zellij list-sessions"
-abbr zr "zellij run --"
-abbr zrf "zellij run -f --"
-
-function init_conda
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    eval /opt/homebrew/anaconda3/bin/conda "shell.fish" hook $argv | source
-    # <<< conda initialize <<<
-end
-
-function ff -a file -d "ff <file.edp>"
-    eval "/usr/local/ff++/mpich3/bin/FreeFem++ $file -glut /usr/local/ff++/mpich3/bin/ffglut"
-end
-
-# Added by Antigravity
-fish_add_path /Users/abeervaishnav/.antigravity/antigravity/bin
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/abeervaishnav/.lmstudio/bin
-# End of LM Studio CLI section
 
 # Hermes Agent — ensure ~/.local/bin is on PATH
 fish_add_path "$HOME/.local/bin"

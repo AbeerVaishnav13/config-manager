@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR __fish_initialized:4300
+SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_ga:git\x20add
 SETUVAR _fish_abbr_gb:git\x20branch
 SETUVAR _fish_abbr_gc:git\x20checkout
@@ -21,4 +21,4 @@ SETUVAR _fish_abbr_lg:lazygit
 SETUVAR _fish_abbr_llc:load_lang_conf
 SETUVAR _fish_abbr_m:math
 SETUVAR _fish_abbr_vim:nvim
-SETUVAR fish_user_paths:/Users/abeervaishnav/\x2elocal/bin\x1e/Users/abeervaishnav/\x2eantigravity/antigravity/bin
+SETUVAR fish_user_paths:/home/rocky/\x2elocal/bin\x1e/Users/abeervaishnav/\x2elocal/bin\x1e/Users/abeervaishnav/\x2eantigravity/antigravity/bin
