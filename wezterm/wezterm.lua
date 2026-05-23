@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local config = {}
+local config = wezterm.config_builder()
 
 -- Configuring font
 config.font_size = 14
@@ -28,6 +28,8 @@ config.scrollback_lines = 100000
 config.window_close_confirmation = "NeverPrompt"
 config.force_reverse_video_cursor = true
 config.hide_mouse_cursor_when_typing = true
+config.initial_cols = 150
+config.initial_rows = 60
 
 -- Keymaps
 local map_key = function(mods, key, act_id, opts)
@@ -57,6 +59,8 @@ config.keys = {
 	map_key("CMD|SHIFT", "j", "ActivatePaneDirection", "Down"),
 	map_key("CMD|SHIFT", "z", "TogglePaneZoomState"),
 	map_key("CTRL", " ", "ActivateCommandPalette"),
+	map_key("CMD", "-", "DecreaseFontSize"),
+	map_key("CMD", "+", "IncreaseFontSize"),
 }
 
 return config

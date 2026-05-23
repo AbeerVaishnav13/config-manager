@@ -101,7 +101,7 @@ set PATH /Library/TeX/texbin/ $PATH
 set PATH "/Volumes/Macintosh HD/Applications/Nordic Semiconductor/bin/" $PATH
 
 # Set man pager
-set -x MANPAGER "bat --theme gruvbox-hard"
+set -x MANPAGER "bat --theme catppuccin-mocha"
 
 # Aliases
 # Rust CLI alternative programs
