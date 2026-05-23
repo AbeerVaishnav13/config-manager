@@ -94,7 +94,7 @@ set PATH $HOME/.local/share/lazyvim/mason/bin/ $PATH
 set PATH $HOME/.local/bin/ $PATH
 
 # Set man pager
-set -x MANPAGER "bat --theme gruvbox-hard"
+set -x MANPAGER "bat --theme catppuccin-mocha"
 
 # Aliases
 # Rust CLI alternative programs
