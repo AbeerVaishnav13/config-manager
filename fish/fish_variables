@@ -1,7 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export SSH_AGENT_PID:2238
-SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dZvsTTKXA1Lfb/agent\x2e2237
+SETUVAR --export SSH_AGENT_PID:13261
+SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dnV1qmPDzduSs/agent\x2e13260
 SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_ga:git\x20add
 SETUVAR _fish_abbr_gb:git\x20branch
@@ -23,4 +23,4 @@ SETUVAR _fish_abbr_lg:lazygit
 SETUVAR _fish_abbr_llc:load_lang_conf
 SETUVAR _fish_abbr_m:math
 SETUVAR _fish_abbr_vim:nvim
-SETUVAR fish_user_paths:/home/rocky/\x2elocal/bin
+SETUVAR fish_user_paths:/home/rocky/\x2enpm\x2dglobal/bin\x1e/home/rocky/\x2elocal/bin

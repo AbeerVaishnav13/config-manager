@@ -104,13 +104,12 @@ alias ll="eza -lh"
 alias ls="eza"
 alias lt="eza -laht"
 # alias rm="rip" # Not aliasing as recommended in the git-repo
-alias rm="printf 'Dont use `rm`. Use `rip` instead.\\n'"
-alias bat="batcat"
+# alias rm="printf 'Dont use `rm`. Use `rip` instead.\\n'"
 
 # Abbreviations
 # Coding and Dir abbrs
 abbr aq "cd $HOME/Documents/AQ/"
-abbr conf "cd $HOME/Dev/config-manager/"
+abbr conf "cd $HOME/dev/config-manager/"
 
 # App abbrs
 abbr jl "jupyter lab"
@@ -137,9 +136,17 @@ abbr gr "git restore"
 abbr gl "git log | bat --plain --theme catppuccin-mocha"
 abbr gf "git fetch"
 
-# Hermes Agent — ensure ~/.local/bin is on PATH
+# User-local CLIs
 fish_add_path "$HOME/.local/bin"
+fish_add_path "$HOME/.npm-global/bin"
+
+# Hermes Agent
+abbr hgr "sudo /home/rocky/.local/bin/hermes gateway restart"
+abbr h hermes
+abbr hc "hermes chat"
+abbr hd "hermes doctor"
+abbr hm "hermes model"
 
 if status is-interactive
-    keychain --eval --agents ssh id_ed25519 | source
+    keychain --quiet --eval --agents ssh id_ed25519 | source
 end
